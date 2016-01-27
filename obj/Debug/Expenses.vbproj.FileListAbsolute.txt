@@ -1,0 +1,17 @@
+F:\UMASS\CS410\Expenses\bin\Debug\Expenses.exe.config
+F:\UMASS\CS410\Expenses\bin\Debug\Expenses.exe
+F:\UMASS\CS410\Expenses\bin\Debug\Expenses.pdb
+F:\UMASS\CS410\Expenses\bin\Debug\Expenses.xml
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.Resources.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.vbproj.GenerateResource.Cache
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.exe
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.xml
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.pdb
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Ingreso.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Main.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Categoria.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Egresos.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Empresa.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_IngrCateg.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.IngMain.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.IngrMain.resources

@@ -1,0 +1,134 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class frm_Categoria
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtAccount = New System.Windows.Forms.TextBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.tlsNuevo = New System.Windows.Forms.ToolStripButton()
+        Me.tlsGuardar = New System.Windows.Forms.ToolStripButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cboType = New System.Windows.Forms.ComboBox()
+        Me.ETYPEBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.ToolStrip1.SuspendLayout()
+        CType(Me.ETYPEBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(43, 40)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(47, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Account"
+        '
+        'txtAccount
+        '
+        Me.txtAccount.Location = New System.Drawing.Point(118, 40)
+        Me.txtAccount.Name = "txtAccount"
+        Me.txtAccount.Size = New System.Drawing.Size(233, 20)
+        Me.txtAccount.TabIndex = 1
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(395, 25)
+        Me.ToolStrip1.TabIndex = 47
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'tlsNuevo
+        '
+        Me.tlsNuevo.Image = Global.Expenses.My.Resources.Resources._New
+        Me.tlsNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tlsNuevo.Name = "tlsNuevo"
+        Me.tlsNuevo.Size = New System.Drawing.Size(62, 22)
+        Me.tlsNuevo.Text = "Nuevo"
+        '
+        'tlsGuardar
+        '
+        Me.tlsGuardar.Image = Global.Expenses.My.Resources.Resources.Save
+        Me.tlsGuardar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tlsGuardar.Name = "tlsGuardar"
+        Me.tlsGuardar.Size = New System.Drawing.Size(69, 22)
+        Me.tlsGuardar.Text = "Guardar"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(67, 68)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(28, 13)
+        Me.Label2.TabIndex = 48
+        Me.Label2.Text = "Tipo"
+        '
+        'cboType
+        '
+        Me.cboType.AutoCompleteCustomSource.AddRange(New String() {"INCOME", "EXPENSE"})
+        Me.cboType.DisplayMember = "typeID"
+        Me.cboType.FormattingEnabled = True
+        Me.cboType.Location = New System.Drawing.Point(118, 65)
+        Me.cboType.Name = "cboType"
+        Me.cboType.Size = New System.Drawing.Size(159, 21)
+        Me.cboType.TabIndex = 49
+        Me.cboType.ValueMember = "typeID"
+        '
+        'ETYPEBindingSource
+        '
+        Me.ETYPEBindingSource.DataMember = "ETYPE"
+        '
+        'frm_Categoria
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(395, 108)
+        Me.Controls.Add(Me.cboType)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.txtAccount)
+        Me.Controls.Add(Me.Label1)
+        Me.Name = "frm_Categoria"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Categoria"
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
+        CType(Me.ETYPEBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents txtAccount As System.Windows.Forms.TextBox
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents tlsNuevo As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tlsGuardar As System.Windows.Forms.ToolStripButton
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents cboType As System.Windows.Forms.ComboBox
+
+    Friend WithEvents ETYPEBindingSource As System.Windows.Forms.BindingSource
+
+End Class
