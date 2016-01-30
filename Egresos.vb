@@ -153,4 +153,78 @@ Public Class frm_Egresos
         dr.Close()
         cnnOLEDB.Close()
     End Sub
+
+    Private Sub tlsGuardar_Click(sender As Object, e As EventArgs) Handles tlsGuardar.Click
+        Dim InsertQuery As String
+
+        Dim expDate As String
+        Dim entityId As Integer
+        Dim accountId As Integer
+        Dim amount As Double
+        Dim comments As String
+
+
+        'If there are empty required fields don't to anything
+        If (checkRequiredFields() = True) Then
+            cnnOLEDB.Open()
+            'Variables to insert to database
+            expDate = mtxtDate.Text
+            entityId = Convert.ToInt32(cboEntity.SelectedValue.ToString)
+            accountId = Convert.ToInt32(cboAccount.SelectedValue.ToString)
+            amount = Convert.ToDouble(mtxtAmount.Text.ToString)
+            comments = txtComments.Text
+
+
+            'Most examples have the following statement
+            'cmd.Parameters.AddWithValue("@id", 1) but it didn't work for me sofar I decided to do 
+            'the following
+
+            InsertQuery = "INSERT INTO [EEXPEN] ([AccountID],[CompanyID],[ExpDate],[Amount],[Comments]) " _
+            + " VALUES (" & accountId & "," & entityId & "," & "'" & expDate & "'" & "," & amount & "," & "'" & comments & "'" & ")"
+            Dim cmd As OleDbCommand = New OleDbCommand(InsertQuery, cnnOLEDB)
+
+
+            cmdOLEDB = New OleDbCommand(InsertQuery, cnnOLEDB)
+            cmdOLEDB.ExecuteNonQuery()
+            cnnOLEDB.Close()
+
+            'Dim accountType As String
+            ' If (accountTypeId = 1) Then
+            ' accountType = "INCOME"
+            'Else
+            ' accountType = "EXPENSE"
+            'End If
+            'lstCategory.Items.Add(New ListViewItem(New String() {accountName, accountType}))
+
+            MsgBox("Account Saved!", MsgBoxStyle.Information, "Saved")
+
+            clearFields()
+            mtxtDate.Focus()
+
+        Else
+            MsgBox("Fill the Required Fields before Saving!", MsgBoxStyle.Critical, "Empty Required Fields")
+        End If
+
+    End Sub
+
+
+    Private Function checkRequiredFields()
+        Dim empty As Boolean
+        If (mtxtDate.Text = "") Or
+            (cboEntity.Text = "") Or
+            (cboAccount.Text = "") Or
+            (mtxtAmount.Text = "") Then
+            empty = False
+            Return empty
+        End If
+        Return True
+    End Function
+
+    Private Sub clearFields()
+        mtxtDate.Clear()
+        cboEntity.Text = ""
+        cboAccount.Text = ""
+        mtxtAmount.Clear()
+        txtComments.Text = ""
+    End Sub
 End Class

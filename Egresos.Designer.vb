@@ -37,7 +37,7 @@ Partial Class frm_Egresos
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tlsVerEgresos = New System.Windows.Forms.ToolStripButton()
         Me.mtxtDate = New System.Windows.Forms.MaskedTextBox()
-        Me.mtxtAmount = New System.Windows.Forms.MaskedTextBox()
+        Me.mtxtAmount = New System.Windows.Forms.TextBox()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -166,9 +166,8 @@ Partial Class frm_Egresos
         '
         'mtxtAmount
         '
-        Me.mtxtAmount.Location = New System.Drawing.Point(151, 140)
+        Me.mtxtAmount.Location = New System.Drawing.Point(151, 135)
         Me.mtxtAmount.Name = "mtxtAmount"
-        Me.mtxtAmount.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.mtxtAmount.Size = New System.Drawing.Size(100, 20)
         Me.mtxtAmount.TabIndex = 49
         '
@@ -211,5 +210,5 @@ Partial Class frm_Egresos
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents tlsVerEgresos As System.Windows.Forms.ToolStripButton
     Friend WithEvents mtxtDate As System.Windows.Forms.MaskedTextBox
-    Friend WithEvents mtxtAmount As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents mtxtAmount As System.Windows.Forms.TextBox
 End Class
