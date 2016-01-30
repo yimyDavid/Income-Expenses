@@ -23,6 +23,7 @@ Partial Class frm_Categoria
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frm_Categoria))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtAccount = New System.Windows.Forms.TextBox()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
@@ -31,6 +32,9 @@ Partial Class frm_Categoria
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cboType = New System.Windows.Forms.ComboBox()
         Me.ETYPEBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.lstCategory = New System.Windows.Forms.ListView()
+        Me.Account = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ToolStrip1.SuspendLayout()
         CType(Me.ETYPEBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -56,13 +60,13 @@ Partial Class frm_Categoria
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(395, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(397, 25)
         Me.ToolStrip1.TabIndex = 47
         Me.ToolStrip1.Text = "ToolStrip1"
         '
         'tlsNuevo
         '
-        Me.tlsNuevo.Image = Global.Expenses.My.Resources.Resources._New
+        Me.tlsNuevo.Image = CType(resources.GetObject("tlsNuevo.Image"), System.Drawing.Image)
         Me.tlsNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tlsNuevo.Name = "tlsNuevo"
         Me.tlsNuevo.Size = New System.Drawing.Size(62, 22)
@@ -70,7 +74,7 @@ Partial Class frm_Categoria
         '
         'tlsGuardar
         '
-        Me.tlsGuardar.Image = Global.Expenses.My.Resources.Resources.Save
+        Me.tlsGuardar.Image = CType(resources.GetObject("tlsGuardar.Image"), System.Drawing.Image)
         Me.tlsGuardar.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tlsGuardar.Name = "tlsGuardar"
         Me.tlsGuardar.Size = New System.Drawing.Size(69, 22)
@@ -100,17 +104,45 @@ Partial Class frm_Categoria
         '
         Me.ETYPEBindingSource.DataMember = "ETYPE"
         '
+        'lstCategory
+        '
+        Me.lstCategory.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Account, Me.Type})
+        Me.lstCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lstCategory.FullRowSelect = True
+        Me.lstCategory.GridLines = True
+        Me.lstCategory.LabelEdit = True
+        Me.lstCategory.Location = New System.Drawing.Point(46, 108)
+        Me.lstCategory.Name = "lstCategory"
+        Me.lstCategory.Size = New System.Drawing.Size(305, 219)
+        Me.lstCategory.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.lstCategory.TabIndex = 50
+        Me.lstCategory.UseCompatibleStateImageBehavior = False
+        Me.lstCategory.View = System.Windows.Forms.View.Details
+        '
+        'Account
+        '
+        Me.Account.Text = "Account"
+        Me.Account.Width = 200
+        '
+        'Type
+        '
+        Me.Type.Text = "Type"
+        Me.Type.Width = 101
+        '
         'frm_Categoria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(395, 108)
+        Me.ClientSize = New System.Drawing.Size(397, 339)
+        Me.Controls.Add(Me.lstCategory)
         Me.Controls.Add(Me.cboType)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.txtAccount)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "frm_Categoria"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Categoria"
@@ -130,5 +162,8 @@ Partial Class frm_Categoria
     Friend WithEvents cboType As System.Windows.Forms.ComboBox
 
     Friend WithEvents ETYPEBindingSource As System.Windows.Forms.BindingSource
+    Friend WithEvents lstCategory As System.Windows.Forms.ListView
+    Friend WithEvents Account As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Type As System.Windows.Forms.ColumnHeader
 
 End Class

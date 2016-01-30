@@ -41,10 +41,18 @@ Public Class frm_Categoria
             cmdOLEDB.ExecuteNonQuery()
             cnnOLEDB.Close()
 
+            Dim accountType As String
+            If (accountTypeId = 1) Then
+                accountType = "INCOME"
+            Else
+                accountType = "EXPENSE"
+            End If
+            lstCategory.Items.Add(New ListViewItem(New String() {accountName, accountType}))
+
             MsgBox("Account Saved!", MsgBoxStyle.Information, "Saved")
 
             clearFields()
-            'txtDate.Focus()
+            txtAccount.Focus()
 
         Else
             MsgBox("Fill the Required Fields before Saving!", MsgBoxStyle.Critical, "Empty Required Fields")
@@ -84,6 +92,28 @@ Public Class frm_Categoria
         cboType.DrawMode = DrawMode.OwnerDrawFixed
 
         dr.Close()
+
+
+        Dim cmd_account As New OleDbCommand("SELECT * FROM EACCNT", cnnOLEDB)
+        Dim dr_account As OleDbDataReader = cmd_account.ExecuteReader
+        ' Dim dtTable As DataTable = New DataTable()
+        'dtTable.Columns.Add("ID", GetType(Integer))
+        'dtTable.Columns.Add("Description", GetType(String))
+
+        While dr_account.Read
+            Dim new_item As New ListViewItem(dr_account.Item("Description").ToString)
+            'checks the type of account. Since the EACCNT table only stores the number id of account I wanted
+            'show the listview with the actual description "EXPENSE" or "INCOME"
+            If (dr_account.Item("typeID").ToString = "1") Then
+                new_item.SubItems.Add("INCOME")
+            Else
+                new_item.SubItems.Add("EXPENSE")
+            End If
+            'new_item.SubItems.Add(dr_account.Item("typeID").ToString)
+            lstCategory.Items.Add(new_item)
+        End While
+
+        dr_account.Close()
         cnnOLEDB.Close()
     End Sub
 

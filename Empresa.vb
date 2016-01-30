@@ -34,11 +34,6 @@
             cnnOLEDB.Open()
             'Variables to insert to database
             companyName = txtCompany.Text
-
-            'Adding Record to listview
-            '  Dim new_item As New ListViewItem(.Text)
-
-
             'Most examples have the following statement
             'cmd.Parameters.AddWithValue("@id", 1) but it didn't work for me sofar I decided to do 
             'the following
@@ -48,15 +43,17 @@
 
             cmdOLEDB = New OleDbCommand(InsertQuery, cnnOLEDB)
             cmdOLEDB.ExecuteNonQuery()
+            'get next auto_increment value from database
             cmd.CommandText = "SELECT @@identity"
             auto_increment = cmd.ExecuteScalar()
             cnnOLEDB.Close()
+            'add new inserted row to list view. I didn't want to retrieve the data to refresh the
+            'listview.
             lstData.Items.Add(New ListViewItem(New String() {auto_increment.ToString, companyName}))
             'Me.Refresh()
 
             MsgBox("Entity Saved!", MsgBoxStyle.Information, "Saved")
-            MsgBox(auto_increment)
-
+            ' MsgBox(auto_increment)
 
             txtCompany.Text = ""
             txtCompany.Focus()
