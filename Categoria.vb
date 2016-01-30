@@ -127,7 +127,7 @@ Public Class frm_Categoria
         'so the items are DataRow objects
         Dim drv As DataRowView = CType(cboType.Items(e.Index), DataRowView)
 
-        'Retrieve the vlue of each column
+        'Retrieve the value of each column
         Dim id As Integer = drv("ID").ToString()
         Dim name As String = drv("Name").ToString()
 

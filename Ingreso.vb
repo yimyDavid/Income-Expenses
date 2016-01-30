@@ -77,4 +77,8 @@ Public Class frm_Ingreso
     Private Sub ts_btnNew_Click(sender As Object, e As EventArgs) Handles ts_btnNew.Click
         clearFields()
     End Sub
+
+    Private Sub frm_Ingreso_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Objective: Fill comboboxes from 
+    End Sub
 End Class

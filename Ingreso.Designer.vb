@@ -187,7 +187,7 @@ Partial Class frm_Ingreso
         '
         'ts_btnSave
         '
-        Me.ts_btnSave.Image = Global.Expenses.My.Resources.Resources.Save
+        Me.ts_btnSave.Image = CType(resources.GetObject("ts_btnSave.Image"), System.Drawing.Image)
         Me.ts_btnSave.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ts_btnSave.Name = "ts_btnSave"
         Me.ts_btnSave.Size = New System.Drawing.Size(69, 22)
