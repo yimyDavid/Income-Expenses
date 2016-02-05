@@ -166,6 +166,7 @@ Public Class frm_Egresos
     Private Sub tlsGuardar_Click(sender As Object, e As EventArgs) Handles tlsGuardar.Click
         Dim InsertQuery As String
 
+        Dim auto_increment As Integer
         Dim expDate As String
         Dim entityId As Integer
         Dim accountId As Integer
@@ -195,10 +196,13 @@ Public Class frm_Egresos
 
             cmdOLEDB = New OleDbCommand(InsertQuery, cnnOLEDB)
             cmdOLEDB.ExecuteNonQuery()
+
+            cmd.CommandText = "SELECT @@identity"
+            auto_increment = cmd.ExecuteScalar()
             cnnOLEDB.Close()
 
             'update parent form
-            Dim new_item As New ListViewItem("78")
+            Dim new_item As New ListViewItem(auto_increment.ToString)
             new_item.SubItems.Add(mtxtDate.Text)
             new_item.SubItems.Add(cboAccount.Text)
             new_item.SubItems.Add(mtxtAmount.Text)
