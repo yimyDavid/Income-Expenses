@@ -141,7 +141,7 @@ Partial Class frm_Categoria
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.txtAccount)
         Me.Controls.Add(Me.Label1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.Name = "frm_Categoria"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

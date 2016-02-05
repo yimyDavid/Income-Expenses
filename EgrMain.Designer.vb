@@ -26,14 +26,18 @@ Partial Class IngMain
         Me.tsExpenses = New System.Windows.Forms.ToolStrip()
         Me.tlsMonth = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.gridEgresos = New System.Windows.Forms.DataGridView()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.lstTransactions = New System.Windows.Forms.ListView()
+        Me.clmID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.clmDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.clmAccount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.clmAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.clmCompany = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tsExpenses.SuspendLayout()
-        CType(Me.gridEgresos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tsExpenses
@@ -43,7 +47,7 @@ Partial Class IngMain
         Me.tsExpenses.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsMonth, Me.ToolStripTextBox1, Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripButton2, Me.ToolStripSeparator2, Me.ToolStripButton3})
         Me.tsExpenses.Location = New System.Drawing.Point(0, 0)
         Me.tsExpenses.Name = "tsExpenses"
-        Me.tsExpenses.Size = New System.Drawing.Size(866, 31)
+        Me.tsExpenses.Size = New System.Drawing.Size(723, 31)
         Me.tsExpenses.TabIndex = 0
         Me.tsExpenses.Text = "ToolStrip1"
         '
@@ -61,25 +65,6 @@ Partial Class IngMain
         Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
         Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 31)
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
-        '
-        'gridEgresos
-        '
-        Me.gridEgresos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
-        Me.gridEgresos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridEgresos.Location = New System.Drawing.Point(0, 62)
-        Me.gridEgresos.Name = "gridEgresos"
-        Me.gridEgresos.Size = New System.Drawing.Size(866, 334)
-        Me.gridEgresos.TabIndex = 1
-        '
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -90,6 +75,11 @@ Partial Class IngMain
         Me.ToolStripButton1.Text = "Nuevo"
         Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
+        '
         'ToolStripButton2
         '
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -98,6 +88,11 @@ Partial Class IngMain
         Me.ToolStripButton2.Name = "ToolStripButton2"
         Me.ToolStripButton2.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton2.Text = "ToolStripButton2"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
         '
         'ToolStripButton3
         '
@@ -108,30 +103,75 @@ Partial Class IngMain
         Me.ToolStripButton3.Size = New System.Drawing.Size(28, 28)
         Me.ToolStripButton3.Text = "ToolStripButton3"
         '
+        'lstTransactions
+        '
+        Me.lstTransactions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmID, Me.clmDate, Me.clmAccount, Me.clmAmount, Me.clmCompany})
+        Me.lstTransactions.FullRowSelect = True
+        Me.lstTransactions.GridLines = True
+        Me.lstTransactions.Location = New System.Drawing.Point(23, 75)
+        Me.lstTransactions.Name = "lstTransactions"
+        Me.lstTransactions.Size = New System.Drawing.Size(677, 360)
+        Me.lstTransactions.TabIndex = 1
+        Me.lstTransactions.UseCompatibleStateImageBehavior = False
+        Me.lstTransactions.View = System.Windows.Forms.View.Details
+        '
+        'clmID
+        '
+        Me.clmID.Text = "Trans. ID"
+        Me.clmID.Width = 100
+        '
+        'clmDate
+        '
+        Me.clmDate.Text = "Date"
+        Me.clmDate.Width = 100
+        '
+        'clmAccount
+        '
+        Me.clmAccount.Text = "Account"
+        Me.clmAccount.Width = 220
+        '
+        'clmAmount
+        '
+        Me.clmAmount.Text = "Amount"
+        Me.clmAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.clmAmount.Width = 100
+        '
+        'clmCompany
+        '
+        Me.clmCompany.Text = "Company"
+        Me.clmCompany.Width = 153
+        '
         'IngMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(866, 396)
-        Me.Controls.Add(Me.gridEgresos)
+        Me.ClientSize = New System.Drawing.Size(723, 462)
+        Me.Controls.Add(Me.lstTransactions)
         Me.Controls.Add(Me.tsExpenses)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
         Me.Name = "IngMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Listado de Egresos"
         Me.tsExpenses.ResumeLayout(False)
         Me.tsExpenses.PerformLayout()
-        CType(Me.gridEgresos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents tsExpenses As System.Windows.Forms.ToolStrip
     Friend WithEvents tlsMonth As System.Windows.Forms.ToolStripComboBox
-    Friend WithEvents gridEgresos As System.Windows.Forms.DataGridView
     Friend WithEvents ToolStripTextBox1 As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents lstTransactions As System.Windows.Forms.ListView
+    Friend WithEvents clmID As System.Windows.Forms.ColumnHeader
+    Friend WithEvents clmDate As System.Windows.Forms.ColumnHeader
+    Friend WithEvents clmAccount As System.Windows.Forms.ColumnHeader
+    Friend WithEvents clmAmount As System.Windows.Forms.ColumnHeader
+    Friend WithEvents clmCompany As System.Windows.Forms.ColumnHeader
 End Class

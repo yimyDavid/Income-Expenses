@@ -4,6 +4,15 @@ Public Class frm_Egresos
     Dim cnnOLEDB As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Expenses.accdb;")
     Dim cmdOLEDB As New OleDbCommand
     Dim cmdInsert As New OleDbCommand
+    Private _ingMain As IngMain
+
+    Sub New(ByVal mainEgr As IngMain)
+        InitializeComponent()
+        _ingMain = mainEgr
+
+    End Sub
+
+
     
     Private Sub tlsNuevo_Click(sender As Object, e As EventArgs) Handles tlsNuevo.Click
       
@@ -188,6 +197,15 @@ Public Class frm_Egresos
             cmdOLEDB.ExecuteNonQuery()
             cnnOLEDB.Close()
 
+            'update parent form
+            Dim new_item As New ListViewItem("78")
+            new_item.SubItems.Add(mtxtDate.Text)
+            new_item.SubItems.Add(cboAccount.Text)
+            new_item.SubItems.Add(mtxtAmount.Text)
+            new_item.SubItems.Add(cboEntity.Text)
+
+            _ingMain.udpateList(new_item)
+
             'Dim accountType As String
             ' If (accountTypeId = 1) Then
             ' accountType = "INCOME"
@@ -196,17 +214,16 @@ Public Class frm_Egresos
             'End If
             'lstCategory.Items.Add(New ListViewItem(New String() {accountName, accountType}))
 
-            MsgBox("Account Saved!", MsgBoxStyle.Information, "Saved")
+            MsgBox("Transaction Saved!", MsgBoxStyle.Information, "Saved")
 
             clearFields()
             mtxtDate.Focus()
 
         Else
-            MsgBox("Fill the Required Fields before Saving!", MsgBoxStyle.Critical, "Empty Required Fields")
+            MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
         End If
 
     End Sub
-
 
     Private Function checkRequiredFields()
         Dim empty As Boolean
@@ -215,9 +232,11 @@ Public Class frm_Egresos
             (cboAccount.Text = "") Or
             (mtxtAmount.Text = "") Then
             empty = False
-            Return empty
+            'Return empty
         End If
-        Return True
+        empty = IsDate(mtxtDate.Text)
+        empty = IsNumeric(mtxtAmount.Text)
+        Return empty
     End Function
 
     Private Sub clearFields()

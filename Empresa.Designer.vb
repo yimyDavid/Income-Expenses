@@ -108,7 +108,9 @@ Partial Class frm_Empresa
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.txtCompany)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frm_Empresa"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Empresa"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()

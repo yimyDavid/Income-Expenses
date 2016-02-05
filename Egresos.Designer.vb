@@ -166,10 +166,11 @@ Partial Class frm_Egresos
         '
         'mtxtAmount
         '
-        Me.mtxtAmount.Location = New System.Drawing.Point(151, 135)
+        Me.mtxtAmount.Location = New System.Drawing.Point(151, 140)
         Me.mtxtAmount.Name = "mtxtAmount"
         Me.mtxtAmount.Size = New System.Drawing.Size(100, 20)
         Me.mtxtAmount.TabIndex = 49
+        Me.mtxtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'frm_Egresos
         '
@@ -188,7 +189,9 @@ Partial Class frm_Egresos
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cboEntity)
         Me.Controls.Add(Me.Label1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frm_Egresos"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Egresos"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
