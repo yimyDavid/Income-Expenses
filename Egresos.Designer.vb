@@ -36,8 +36,13 @@ Partial Class frm_Egresos
         Me.tlsGuardar = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tlsVerEgresos = New System.Windows.Forms.ToolStripButton()
+        Me.tls_btnUpdate = New System.Windows.Forms.ToolStripButton()
         Me.mtxtDate = New System.Windows.Forms.MaskedTextBox()
         Me.mtxtAmount = New System.Windows.Forms.TextBox()
+        Me.lblUpdateWarning = New System.Windows.Forms.Label()
+        Me.lblUpdateId = New System.Windows.Forms.Label()
+        Me.dtpDate = New System.Windows.Forms.DateTimePicker()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -116,7 +121,7 @@ Partial Class frm_Egresos
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar, Me.ToolStripSeparator1, Me.tlsVerEgresos})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar, Me.ToolStripSeparator1, Me.tlsVerEgresos, Me.tls_btnUpdate})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -154,6 +159,15 @@ Partial Class frm_Egresos
         Me.tlsVerEgresos.Size = New System.Drawing.Size(93, 22)
         Me.tlsVerEgresos.Text = "Transactions"
         '
+        'tls_btnUpdate
+        '
+        Me.tls_btnUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tls_btnUpdate.Image = Global.Expenses.My.Resources.Resources.Update
+        Me.tls_btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tls_btnUpdate.Name = "tls_btnUpdate"
+        Me.tls_btnUpdate.Size = New System.Drawing.Size(23, 22)
+        Me.tls_btnUpdate.Text = "ToolStripButton1"
+        '
         'mtxtDate
         '
         Me.mtxtDate.Location = New System.Drawing.Point(151, 49)
@@ -172,12 +186,58 @@ Partial Class frm_Egresos
         Me.mtxtAmount.TabIndex = 49
         Me.mtxtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'lblUpdateWarning
+        '
+        Me.lblUpdateWarning.AutoSize = True
+        Me.lblUpdateWarning.ForeColor = System.Drawing.Color.Red
+        Me.lblUpdateWarning.Location = New System.Drawing.Point(148, 30)
+        Me.lblUpdateWarning.Name = "lblUpdateWarning"
+        Me.lblUpdateWarning.Size = New System.Drawing.Size(191, 13)
+        Me.lblUpdateWarning.TabIndex = 50
+        Me.lblUpdateWarning.Text = "You are Currently Updating this Record"
+        Me.lblUpdateWarning.Visible = False
+        '
+        'lblUpdateId
+        '
+        Me.lblUpdateId.AutoSize = True
+        Me.lblUpdateId.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblUpdateId.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.lblUpdateId.Location = New System.Drawing.Point(290, 48)
+        Me.lblUpdateId.Name = "lblUpdateId"
+        Me.lblUpdateId.Size = New System.Drawing.Size(19, 20)
+        Me.lblUpdateId.TabIndex = 51
+        Me.lblUpdateId.Text = "0"
+        '
+        'dtpDate
+        '
+        Me.dtpDate.CustomFormat = "MM/dd/yyyy"
+        Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDate.Location = New System.Drawing.Point(277, 136)
+        Me.dtpDate.Name = "dtpDate"
+        Me.dtpDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.dtpDate.Size = New System.Drawing.Size(116, 20)
+        Me.dtpDate.TabIndex = 52
+        Me.dtpDate.Value = New Date(2016, 2, 8, 14, 57, 20, 0)
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(397, 30)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 53
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frm_Egresos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(460, 268)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.dtpDate)
+        Me.Controls.Add(Me.lblUpdateId)
+        Me.Controls.Add(Me.lblUpdateWarning)
         Me.Controls.Add(Me.mtxtAmount)
         Me.Controls.Add(Me.mtxtDate)
         Me.Controls.Add(Me.ToolStrip1)
@@ -214,4 +274,9 @@ Partial Class frm_Egresos
     Friend WithEvents tlsVerEgresos As System.Windows.Forms.ToolStripButton
     Friend WithEvents mtxtDate As System.Windows.Forms.MaskedTextBox
     Friend WithEvents mtxtAmount As System.Windows.Forms.TextBox
+    Friend WithEvents tls_btnUpdate As System.Windows.Forms.ToolStripButton
+    Friend WithEvents lblUpdateWarning As System.Windows.Forms.Label
+    Friend WithEvents lblUpdateId As System.Windows.Forms.Label
+    Friend WithEvents dtpDate As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

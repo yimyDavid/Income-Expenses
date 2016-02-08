@@ -28,15 +28,16 @@ Partial Class IngMain
         Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.tls_btnUpdate = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.tls_btnDelete = New System.Windows.Forms.ToolStripButton()
         Me.lstTransactions = New System.Windows.Forms.ListView()
         Me.clmID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.clmDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.clmAccount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.clmAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.clmCompany = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.txtId = New System.Windows.Forms.Label()
         Me.tsExpenses.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,7 +45,7 @@ Partial Class IngMain
         '
         Me.tsExpenses.BackColor = System.Drawing.SystemColors.Control
         Me.tsExpenses.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.tsExpenses.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsMonth, Me.ToolStripTextBox1, Me.ToolStripButton1, Me.ToolStripSeparator1, Me.ToolStripButton2, Me.ToolStripSeparator2, Me.ToolStripButton3})
+        Me.tsExpenses.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsMonth, Me.ToolStripTextBox1, Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tls_btnUpdate, Me.ToolStripSeparator2, Me.tls_btnDelete})
         Me.tsExpenses.Location = New System.Drawing.Point(0, 0)
         Me.tsExpenses.Name = "tsExpenses"
         Me.tsExpenses.Size = New System.Drawing.Size(723, 31)
@@ -80,28 +81,28 @@ Partial Class IngMain
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 31)
         '
-        'ToolStripButton2
+        'tls_btnUpdate
         '
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = Global.Expenses.My.Resources.Resources.Edit
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(28, 28)
-        Me.ToolStripButton2.Text = "ToolStripButton2"
+        Me.tls_btnUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tls_btnUpdate.Image = Global.Expenses.My.Resources.Resources.Edit
+        Me.tls_btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tls_btnUpdate.Name = "tls_btnUpdate"
+        Me.tls_btnUpdate.Size = New System.Drawing.Size(28, 28)
+        Me.tls_btnUpdate.Text = "ToolStripButton2"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 31)
         '
-        'ToolStripButton3
+        'tls_btnDelete
         '
-        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(28, 28)
-        Me.ToolStripButton3.Text = "ToolStripButton3"
+        Me.tls_btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tls_btnDelete.Image = CType(resources.GetObject("tls_btnDelete.Image"), System.Drawing.Image)
+        Me.tls_btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tls_btnDelete.Name = "tls_btnDelete"
+        Me.tls_btnDelete.Size = New System.Drawing.Size(28, 28)
+        Me.tls_btnDelete.Text = "ToolStripButton3"
         '
         'lstTransactions
         '
@@ -141,12 +142,22 @@ Partial Class IngMain
         Me.clmCompany.Text = "Company"
         Me.clmCompany.Width = 153
         '
+        'txtId
+        '
+        Me.txtId.AutoSize = True
+        Me.txtId.Location = New System.Drawing.Point(431, 18)
+        Me.txtId.Name = "txtId"
+        Me.txtId.Size = New System.Drawing.Size(0, 13)
+        Me.txtId.TabIndex = 2
+        Me.txtId.Visible = False
+        '
         'IngMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(723, 462)
+        Me.Controls.Add(Me.txtId)
         Me.Controls.Add(Me.lstTransactions)
         Me.Controls.Add(Me.tsExpenses)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -165,13 +176,14 @@ Partial Class IngMain
     Friend WithEvents ToolStripTextBox1 As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tls_btnUpdate As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents tls_btnDelete As System.Windows.Forms.ToolStripButton
     Friend WithEvents lstTransactions As System.Windows.Forms.ListView
     Friend WithEvents clmID As System.Windows.Forms.ColumnHeader
     Friend WithEvents clmDate As System.Windows.Forms.ColumnHeader
     Friend WithEvents clmAccount As System.Windows.Forms.ColumnHeader
     Friend WithEvents clmAmount As System.Windows.Forms.ColumnHeader
     Friend WithEvents clmCompany As System.Windows.Forms.ColumnHeader
+    Friend WithEvents txtId As System.Windows.Forms.Label
 End Class

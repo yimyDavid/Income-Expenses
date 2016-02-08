@@ -5,11 +5,26 @@ Public Class frm_Egresos
     Dim cmdOLEDB As New OleDbCommand
     Dim cmdInsert As New OleDbCommand
     Private _ingMain As IngMain
+    Private _frm_Main As frm_Main
+
+    Dim auto_increment As Integer
+    Dim updateId As Integer
+    Dim expDate As String
+    Dim entityId As Integer
+    Dim accountId As Integer
+    Dim amount As Double
+    Dim comments As String
 
     Sub New(ByVal mainEgr As IngMain)
         InitializeComponent()
         _ingMain = mainEgr
 
+    End Sub
+
+    Sub New(frm_Main As frm_Main)
+        ' TODO: Complete member initialization 
+        InitializeComponent()
+        _frm_Main = frm_Main
     End Sub
 
 
@@ -166,28 +181,22 @@ Public Class frm_Egresos
     Private Sub tlsGuardar_Click(sender As Object, e As EventArgs) Handles tlsGuardar.Click
         Dim InsertQuery As String
 
-        Dim auto_increment As Integer
-        Dim expDate As String
-        Dim entityId As Integer
-        Dim accountId As Integer
-        Dim amount As Double
-        Dim comments As String
+        ' Dim auto_increment As Integer
+        'Dim expDate As String
+        ' Dim entityId As Integer
+        ' Dim accountId As Integer
+        ' Dim amount As Double
+        ' Dim comments As String
 
 
         'If there are empty required fields don't to anything
         If (checkRequiredFields() = True) Then
             cnnOLEDB.Open()
-            'Variables to insert to database
-            expDate = mtxtDate.Text
-            entityId = Convert.ToInt32(cboEntity.SelectedValue.ToString)
-            accountId = Convert.ToInt32(cboAccount.SelectedValue.ToString)
-            amount = Convert.ToDouble(mtxtAmount.Text.ToString)
-            comments = txtComments.Text
-
-
+            'Variables to insert to database 
             'Most examples have the following statement
             'cmd.Parameters.AddWithValue("@id", 1) but it didn't work for me sofar I decided to do 
             'the following
+            getDataFromForm()
 
             InsertQuery = "INSERT INTO [EEXPEN] ([AccountID],[CompanyID],[ExpDate],[Amount],[Comments]) " _
             + " VALUES (" & accountId & "," & entityId & "," & "'" & expDate & "'" & "," & amount & "," & "'" & comments & "'" & ")"
@@ -203,12 +212,12 @@ Public Class frm_Egresos
 
             'update parent form
             Dim new_item As New ListViewItem(auto_increment.ToString)
-            new_item.SubItems.Add(mtxtDate.Text)
+            new_item.SubItems.Add(dtpDate.Text)
             new_item.SubItems.Add(cboAccount.Text)
             new_item.SubItems.Add(mtxtAmount.Text)
             new_item.SubItems.Add(cboEntity.Text)
 
-            _ingMain.udpateList(new_item)
+            _ingMain.updateList(new_item)
 
             'Dim accountType As String
             ' If (accountTypeId = 1) Then
@@ -249,5 +258,91 @@ Public Class frm_Egresos
         cboAccount.Text = ""
         mtxtAmount.Clear()
         txtComments.Text = ""
+    End Sub
+
+    Public Sub fillFieldsToUpdate()
+        Dim fillId As String
+        fillId = _ingMain.getId()
+        'MsgBox("BEFORE QUERY " & updateId)
+        Dim dateFormat As String = "MM/dd/yyyy"
+
+        lblUpdateWarning.Visible = True
+        lblUpdateId.Text = fillId.ToString
+        lblUpdateId.Visible = True
+
+        ' SELECT EEXPEN.ExpenseID, EEXPEN.ExpDate, EEXPEN.Amount
+        'FROM EEXPEN
+        'WHERE (([EEXPEN].[ExpenseID]=1));
+
+        Try
+            cnnOLEDB.Open()
+
+            cmdOLEDB = New OleDbCommand("SELECT * FROM EEXPEN WHERE ExpenseID = " & fillId, cnnOLEDB)
+            'cmd.ExecuteNonQuery()
+            Dim dr As OleDbDataReader = cmdOLEDB.ExecuteReader
+
+            While dr.Read
+                'mtxtDate.Text = CDate(dr.Item("ExpDate")).ToString(dateFormat)
+                dtpDate.Text = CDate(dr.Item("ExpDate")).ToString(dateFormat)
+                cboEntity.SelectedValue = dr.Item("CompanyID").ToString()
+                cboAccount.SelectedValue = dr.Item("AccountID").ToString()
+                mtxtAmount.Text = FormatNumber(dr.Item("Amount"), 2)
+                txtComments.Text = dr.Item("Comments").ToString()
+                'mtxtDate.Text = FormatDateTime(txtDate, DateFormat.ShortDate)
+                'mtxtAmount.Text = 
+                'MsgBox(mtxtDate.Text)
+                'Dim new_item As New ListViewItem(dr.Item("CompanyID").ToString)
+                'new_item.SubItems.Add(dr.Item("Description").ToString)
+            End While
+
+            dr.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error Retrieving Record" & ex.Message, "Retrieve Record")
+        Finally
+
+            cnnOLEDB.Close()
+
+        End Try
+    End Sub
+
+    Private Sub tls_btnUpdate_Click(sender As Object, e As EventArgs) Handles tls_btnUpdate.Click
+
+        'Dim updateListViewData As ListViewItem
+        Try
+            getDataFromForm()
+            cnnOLEDB.Open()
+
+            cmdOLEDB = New OleDbCommand("UPDATE EEXPEN SET AccountID = " & accountId & ", CompanyID = " & entityId & ", ExpDate = " & "'" & expDate & "'" & ", Amount = " & amount & " WHERE ExpenseID=" & updateId, cnnOLEDB)
+            cmdOLEDB.ExecuteNonQuery()
+
+            'update parent form
+            Dim updateItem As New ListViewItem(updateId.ToString)
+            updateItem.SubItems.Add(dtpDate.Text)
+            updateItem.SubItems.Add(cboAccount.Text)
+            updateItem.SubItems.Add(mtxtAmount.Text)
+            updateItem.SubItems.Add(cboEntity.Text)
+
+            _ingMain.updateList(updateItem)
+        Catch ex As Exception
+            MessageBox.Show("Error Updating Record" & ex.Message, "Update Record")
+        Finally
+            cnnOLEDB.Close()
+        End Try
+    End Sub
+
+    Public Sub getDataFromForm()
+        updateId = Convert.ToInt32(lblUpdateId.Text)
+        expDate = dtpDate.Value.ToString("MM/dd/yyyy")
+        ' CDate(dr.Item("ExpDate")).ToString(DateFormat)
+        'expDate = mtxtDate.Text
+        entityId = Convert.ToInt32(cboEntity.SelectedValue.ToString)
+        accountId = Convert.ToInt32(cboAccount.SelectedValue.ToString)
+        amount = Convert.ToDouble(mtxtAmount.Text.ToString)
+        comments = txtComments.Text
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        MsgBox(dtpDate.Value)
     End Sub
 End Class

@@ -11,7 +11,7 @@
     End Sub
 
     Private Sub EgresosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EgresosToolStripMenuItem.Click
-        Dim frm_Egreso As New frm_Egresos(IngMain)
+        Dim frm_Egreso As New frm_Egresos(Me)
 
         'Set the parent to this form
         frm_Egreso.MdiParent = Me
@@ -67,4 +67,7 @@
         frm_Ingresos.MdiParent = Me
         frm_Ingreso.Show()
     End Sub
+
+
+
 End Class
