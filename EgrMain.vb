@@ -164,6 +164,10 @@ Public Class IngMain
         frmEgresoToFill.MdiParent = frm_Main
         frmEgresoToFill.Show()
         frmEgresoToFill.fillFieldsToUpdate()
+        frmEgresoToFill.lblUpdateId.Visible = True
+        frmEgresoToFill.tls_btnUpdate.Enabled = True
+        frmEgresoToFill.tlsGuardar.Enabled = False
+        frmEgresoToFill.tlsNuevo.Enabled = False
     End Sub
 
 End Class

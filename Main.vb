@@ -2,20 +2,19 @@
 
 
     Private Sub IngresosToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles IngresosToolStripMenuItem1.Click
-        Dim frm_Ingreso As New frm_Ingreso()
+         Dim frm_Expense As New frm_Egresos(Me)
+        'set main form to be parent of frm_expense
+        frm_Expense.MdiParent = Me
+        frm_Expense.Show()
 
-        'Set the parent fo this form
-        frm_Ingreso.MdiParent = Me
-
-        frm_Ingreso.Show()
     End Sub
 
     Private Sub EgresosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EgresosToolStripMenuItem.Click
-        Dim frm_Egreso As New frm_Egresos(Me)
+        Dim frm_lstEgresos As New IngMain()
 
-        'Set the parent to this form
-        frm_Egreso.MdiParent = Me
-        frm_Egreso.Show()
+        'Set parent for this form
+        frm_lstEgresos.MdiParent = Me
+        frm_lstEgresos.Show()
     End Sub
 
     Private Sub TiendaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TiendaToolStripMenuItem.Click
@@ -43,16 +42,7 @@
         frm_IngrCateg.Show()
     End Sub
 
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
-        Me.Close()
-
-    End Sub
-
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        Me.Close()
-    End Sub
-
-    Private Sub tslBEgresos_Click(sender As Object, e As EventArgs) Handles tslBEgresos.Click
+    Private Sub tlsRecords_Click(sender As Object, e As EventArgs) Handles tlsRecords.Click
         Dim frm_lstEgresos As New IngMain()
 
         'Set parent for this form
@@ -60,14 +50,43 @@
         frm_lstEgresos.Show()
     End Sub
 
-    Private Sub tlsIngreso_Click(sender As Object, e As EventArgs) Handles tlsIngreso.Click
-        'test data access
-        Dim frm_Ingresos As New frm_Ingreso()
+    Private Sub tlsAccounts_Click(sender As Object, e As EventArgs) Handles tlsAccounts.Click
+        Dim frm_IngrCateg As New frm_Categoria()
 
-        frm_Ingresos.MdiParent = Me
-        frm_Ingreso.Show()
+        'Set parent for this form
+        frm_IngrCateg.MdiParent = Me
+        frm_IngrCateg.Show()
     End Sub
 
+    Private Sub tlsEntity_Click(sender As Object, e As EventArgs) Handles tlsEntity.Click
+        Dim frm_Empresa As New frm_Empresa()
 
+        'Set parent for this form
+        frm_Empresa.MdiParent = Me
+        frm_Empresa.Show()
+    End Sub
 
+    Private Sub tlsClose_Click(sender As Object, e As EventArgs) Handles tlsClose.Click
+        Dim close As Integer
+        close = MsgBox("Are you sure Closing the Program?", MsgBoxStyle.YesNo + vbQuestion, "About to Close")
+        If (close = vbYes) Then
+            Me.Close()
+        End If
+    End Sub
+
+    Private Sub ProgramadorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProgramadorToolStripMenuItem.Click
+        Dim frm_About As New frmAbout()
+
+        'Set parent for this form
+        frm_About.MdiParent = Me
+        frm_About.Show()
+    End Sub
+
+    Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
+        Dim close As Integer
+        close = MsgBox("Are you sure Closing the Program?", MsgBoxStyle.YesNo + vbQuestion, "About to Close")
+        If (close = vbYes) Then
+            Me.Close()
+        End If
+    End Sub
 End Class

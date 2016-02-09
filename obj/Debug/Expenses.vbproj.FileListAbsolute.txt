@@ -15,3 +15,4 @@ F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Empresa.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_IngrCateg.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.IngMain.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.IngrMain.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frmAbout.resources

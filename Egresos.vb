@@ -230,7 +230,7 @@ Public Class frm_Egresos
             MsgBox("Transaction Saved!", MsgBoxStyle.Information, "Saved")
 
             clearFields()
-            mtxtDate.Focus()
+
 
         Else
             MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
@@ -240,20 +240,18 @@ Public Class frm_Egresos
 
     Private Function checkRequiredFields()
         Dim empty As Boolean
-        If (mtxtDate.Text = "") Or
-            (cboEntity.Text = "") Or
+        If (cboEntity.Text = "") Or
             (cboAccount.Text = "") Or
             (mtxtAmount.Text = "") Then
             empty = False
             'Return empty
         End If
-        empty = IsDate(mtxtDate.Text)
         empty = IsNumeric(mtxtAmount.Text)
         Return empty
     End Function
 
     Private Sub clearFields()
-        mtxtDate.Clear()
+
         cboEntity.Text = ""
         cboAccount.Text = ""
         mtxtAmount.Clear()
@@ -312,7 +310,7 @@ Public Class frm_Egresos
             getDataFromForm()
             cnnOLEDB.Open()
 
-            cmdOLEDB = New OleDbCommand("UPDATE EEXPEN SET AccountID = " & accountId & ", CompanyID = " & entityId & ", ExpDate = " & "'" & expDate & "'" & ", Amount = " & amount & " WHERE ExpenseID=" & updateId, cnnOLEDB)
+            cmdOLEDB = New OleDbCommand("UPDATE EEXPEN SET AccountID = " & accountId & ", CompanyID = " & entityId & ", ExpDate = " & "'" & expDate & "'" & ", Amount = " & amount & ", Comments = " & "'" & comments & "'" & " WHERE ExpenseID=" & updateId, cnnOLEDB)
             cmdOLEDB.ExecuteNonQuery()
 
             'update parent form
@@ -340,9 +338,5 @@ Public Class frm_Egresos
         amount = Convert.ToDouble(mtxtAmount.Text.ToString)
         comments = txtComments.Text
 
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        MsgBox(dtpDate.Value)
     End Sub
 End Class
