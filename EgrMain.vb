@@ -33,35 +33,41 @@ Public Class IngMain
     End Sub
 
     Private Sub IngMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cnnOLEDB.Open()
-        Dim selectQuery As String
 
-        selectQuery = "SELECT EEXPEN.ExpenseID, EEXPEN.ExpDate, EACCNT.Description, EEXPEN.Amount, ECOMP.Description " _
-                      + "FROM (EEXPEN INNER JOIN EACCNT ON EEXPEN.AccountID = EACCNT.AccountID) INNER JOIN ECOMP ON EEXPEN.CompanyID = ECOMP.CompanyID"
+        Try
+            cnnOLEDB.Open()
+            Dim selectQuery As String
 
-        Dim cmd As New OleDbCommand(selectQuery, cnnOLEDB)
-        Dim dr As OleDbDataReader = cmd.ExecuteReader
-        Dim dtTable As DataTable = New DataTable()
-        dtTable.Columns.Add("ID", GetType(Integer))
-        dtTable.Columns.Add("Description", GetType(String))
-        While dr.Read
-            Dim formatDate As String
-            Dim formatAmount As String
-            Dim new_item As New ListViewItem(dr.Item("ExpenseID").ToString)
-            formatDate = Format(dr.Item("ExpDate"), "MM/dd/yyyy")
-            formatAmount = Format(dr.Item("Amount"), "###,###.00")
-            new_item.SubItems.Add(formatDate)
-            new_item.SubItems.Add(dr.Item("EACCNT.Description").ToString)
+            selectQuery = "SELECT EEXPEN.ExpenseID, EEXPEN.ExpDate, EACCNT.Description, EEXPEN.Amount, ECOMP.Description " _
+                          + "FROM (EEXPEN INNER JOIN EACCNT ON EEXPEN.AccountID = EACCNT.AccountID) INNER JOIN ECOMP ON EEXPEN.CompanyID = ECOMP.CompanyID"
+
+            Dim cmd As New OleDbCommand(selectQuery, cnnOLEDB)
+            Dim dr As OleDbDataReader = cmd.ExecuteReader
+            Dim dtTable As DataTable = New DataTable()
+            dtTable.Columns.Add("ID", GetType(Integer))
+            dtTable.Columns.Add("Description", GetType(String))
+            While dr.Read
+                Dim formatDate As String
+                Dim formatAmount As String
+                Dim new_item As New ListViewItem(dr.Item("ExpenseID").ToString)
+                formatDate = Format(dr.Item("ExpDate"), "MM/dd/yyyy")
+                formatAmount = Format(dr.Item("Amount"), "###,###.00")
+                new_item.SubItems.Add(formatDate)
+                new_item.SubItems.Add(dr.Item("EACCNT.Description").ToString)
                 'new_item.SubItems.Add(dr.Item("Amount").ToString)
-            new_item.SubItems.Add(formatAmount)
+                new_item.SubItems.Add(formatAmount)
 
-            new_item.SubItems.Add(dr.Item("ECOMP.Description").ToString)
-            lstTransactions.Items.Add(new_item)
+                new_item.SubItems.Add(dr.Item("ECOMP.Description").ToString)
+                lstTransactions.Items.Add(new_item)
 
             End While
 
-        dr.Close()
-        cnnOLEDB.Close()
+            dr.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error fetching data" & ex.Message, "Fetching Error")
+        Finally
+            cnnOLEDB.Close()
+        End Try
     End Sub
 
     Public Sub updateList(detailList As ListViewItem)
@@ -79,8 +85,6 @@ Public Class IngMain
         Else
             lstTransactions.Items.Add(detailList)
         End If
-
-
         lstTransactions.Refresh()
     End Sub
 
@@ -141,7 +145,6 @@ Public Class IngMain
             MsgBox("Select Record from the list first", MsgBoxStyle.Information, "Select Record")
         End If
 
-
         If (Answer = vbYes And deleteId >= 0) Then
             deleteItemFromList()
             txtId.Text = ""
@@ -157,10 +160,6 @@ Public Class IngMain
 
 
     Private Sub tls_btnUpdate_Click(sender As Object, e As EventArgs) Handles tls_btnUpdate.Click
-        'Dim frm_Expense As New frm_Egresos(Me)
-        'set main form to be parent of frm_expense
-        'frm_Expense.MdiParent = frm_Main
-        'frm_Expense.Show()
         frmEgresoToFill = New frm_Egresos(Me)
         frmEgresoToFill.MdiParent = frm_Main
         frmEgresoToFill.Show()
@@ -169,13 +168,6 @@ Public Class IngMain
         frmEgresoToFill.tls_btnUpdate.Enabled = True
         frmEgresoToFill.tlsGuardar.Enabled = False
         frmEgresoToFill.tlsNuevo.Enabled = False
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim rptTran As New rptTranViewer(frmReports)
-        'set main form to be parent of frm_expense
-        rptTran.MdiParent = frm_Main
-        rptTran.Show()
     End Sub
 
 End Class

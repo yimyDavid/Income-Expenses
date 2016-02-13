@@ -42,7 +42,9 @@ Partial Class frm_Main
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.tlsClose = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.MenuStrip1.SuspendLayout()
         Me.tlsBarMain.SuspendLayout()
         Me.SuspendLayout()
@@ -121,7 +123,7 @@ Partial Class frm_Main
         '
         Me.tlsBarMain.ImageScalingSize = New System.Drawing.Size(48, 48)
         Me.tlsBarMain.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.tlsBarMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsRecords, Me.ToolStripSeparator1, Me.tlsAccounts, Me.ToolStripSeparator2, Me.tlsEntity, Me.ToolStripSeparator4, Me.tlsClose, Me.ToolStripSeparator5})
+        Me.tlsBarMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsRecords, Me.ToolStripSeparator1, Me.tlsAccounts, Me.ToolStripSeparator2, Me.tlsEntity, Me.ToolStripSeparator4, Me.tlsClose, Me.ToolStripSeparator5, Me.ToolStripButton1, Me.ToolStripSeparator6})
         Me.tlsBarMain.Location = New System.Drawing.Point(0, 24)
         Me.tlsBarMain.Name = "tlsBarMain"
         Me.tlsBarMain.Padding = New System.Windows.Forms.Padding(3)
@@ -195,6 +197,17 @@ Partial Class frm_Main
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 83)
         '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.AutoSize = False
+        Me.ToolStripButton1.Image = Global.Expenses.My.Resources.Resources.reports
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Margin = New System.Windows.Forms.Padding(5)
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(67, 73)
+        Me.ToolStripButton1.Text = "Re&ports"
+        Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.AutoSize = True
@@ -203,6 +216,11 @@ Partial Class frm_Main
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(567, 0)
         Me.FlowLayoutPanel1.TabIndex = 4
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 83)
         '
         'frm_Main
         '
@@ -246,5 +264,7 @@ Partial Class frm_Main
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
 
 End Class

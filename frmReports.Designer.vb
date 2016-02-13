@@ -23,6 +23,7 @@ Partial Class frmReports
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReports))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dpeDate = New System.Windows.Forms.DateTimePicker()
         Me.dpiDate = New System.Windows.Forms.DateTimePicker()
@@ -318,7 +319,8 @@ Partial Class frmReports
         Me.Controls.Add(Me.btnPreview)
         Me.Controls.Add(Me.gboxAccounts)
         Me.Controls.Add(Me.GroupBox1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmReports"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Reports"

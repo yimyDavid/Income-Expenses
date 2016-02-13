@@ -35,7 +35,6 @@ Partial Class frm_Egresos
         Me.tlsNuevo = New System.Windows.Forms.ToolStripButton()
         Me.tlsGuardar = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tlsVerEgresos = New System.Windows.Forms.ToolStripButton()
         Me.tls_btnUpdate = New System.Windows.Forms.ToolStripButton()
         Me.mtxtAmount = New System.Windows.Forms.TextBox()
         Me.lblUpdateWarning = New System.Windows.Forms.Label()
@@ -119,7 +118,7 @@ Partial Class frm_Egresos
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar, Me.ToolStripSeparator1, Me.tlsVerEgresos, Me.tls_btnUpdate})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar, Me.ToolStripSeparator1, Me.tls_btnUpdate})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -148,14 +147,6 @@ Partial Class frm_Egresos
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
-        '
-        'tlsVerEgresos
-        '
-        Me.tlsVerEgresos.Image = Global.Expenses.My.Resources.Resources.Preview
-        Me.tlsVerEgresos.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tlsVerEgresos.Name = "tlsVerEgresos"
-        Me.tlsVerEgresos.Size = New System.Drawing.Size(93, 22)
-        Me.tlsVerEgresos.Text = "Transactions"
         '
         'tls_btnUpdate
         '
@@ -228,10 +219,12 @@ Partial Class frm_Egresos
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.cboEntity)
         Me.Controls.Add(Me.Label1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "frm_Egresos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Egresos"
+        Me.Text = "Expense"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -250,7 +243,6 @@ Partial Class frm_Egresos
     Friend WithEvents tlsNuevo As System.Windows.Forms.ToolStripButton
     Friend WithEvents tlsGuardar As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents tlsVerEgresos As System.Windows.Forms.ToolStripButton
     Friend WithEvents mtxtAmount As System.Windows.Forms.TextBox
     Friend WithEvents tls_btnUpdate As System.Windows.Forms.ToolStripButton
     Friend WithEvents lblUpdateWarning As System.Windows.Forms.Label

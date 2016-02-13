@@ -26,6 +26,7 @@ Partial Class rptTranViewer
         Dim ReportDataSource1 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
         Dim ReportDataSource2 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
         Dim ReportDataSource3 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(rptTranViewer))
         Me.DataTable1BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ExpensesDataSet2 = New Expenses.ExpensesDataSet2()
         Me.rptPrintTran = New Microsoft.Reporting.WinForms.ReportViewer()
@@ -110,6 +111,7 @@ Partial Class rptTranViewer
         Me.Controls.Add(Me.rptEntity)
         Me.Controls.Add(Me.rptAccountDate)
         Me.Controls.Add(Me.rptPrintTran)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "rptTranViewer"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "TCMY Reports"

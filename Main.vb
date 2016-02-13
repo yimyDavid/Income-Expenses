@@ -100,11 +100,18 @@
     End Sub
 
     Private Sub ReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportsToolStripMenuItem.Click
+        openReport()
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        openReport()
+    End Sub
+
+    Private Sub openReport()
         Dim frm_Report As New frmReports()
 
         'Set parent for this form
         frm_Report.MdiParent = Me
         frm_Report.Show()
     End Sub
-
 End Class

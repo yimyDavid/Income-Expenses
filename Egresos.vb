@@ -30,30 +30,7 @@ Public Class frm_Egresos
 
     
     Private Sub tlsNuevo_Click(sender As Object, e As EventArgs) Handles tlsNuevo.Click
-      
-
-
-        'Dim cmd_account As New OleDbCommand("SELECT * FROM EACCNT", cnnOLEDB)
-        ' Dim dr_account As OleDbDataReader = cmd_account.ExecuteReader
-        ' Dim dtTable As DataTable = New DataTable()
-        'dtTable.Columns.Add("ID", GetType(Integer))
-        'dtTable.Columns.Add("Description", GetType(String))
-
-        ' While dr_account.Read
-        'Dim new_item As New ListViewItem(dr_account.Item("Description").ToString)
-        'checks the type of account. Since the EACCNT table only stores the number id of account I wanted
-        'show the listview with the actual description "EXPENSE" or "INCOME"
-        ' If (dr_account.Item("typeID").ToString = "1") Then
-        ' new_item.SubItems.Add("INCOME")
-        'Else
-        ' new_item.SubItems.Add("EXPENSE")
-        'End If
-        'new_item.SubItems.Add(dr_account.Item("typeID").ToString)
-        'lstCategory.Items.Add(new_item)
-        ' End While
-
-        ' dr_account.Close()
-        'cnnOLEDB.Close()
+        clearFields()
 
 
     End Sub
@@ -136,61 +113,60 @@ Public Class frm_Egresos
     End Sub
 
     Private Sub frm_Egresos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cnnOLEDB.Open()
-        Dim cmd As New OleDbCommand("SELECT * FROM ECOMP", cnnOLEDB)
-        Dim dr As OleDbDataReader = cmd.ExecuteReader
-        Dim dtTable As DataTable = New DataTable()
-        dtTable.Columns.Add("CompanyID", GetType(Integer))
-        dtTable.Columns.Add("Description", GetType(String))
 
-        While dr.Read
-            dtTable.Rows.Add(dr(0), dr(1))
-            'cboType.Items.Add(dr(0).ToString)
-            'cboType.Items.Add(dr(1).ToString)
-        End While
+        Try
+            cnnOLEDB.Open()
+            Dim cmd As New OleDbCommand("SELECT * FROM ECOMP", cnnOLEDB)
+            Dim dr As OleDbDataReader = cmd.ExecuteReader
+            Dim dtTable As DataTable = New DataTable()
+            dtTable.Columns.Add("CompanyID", GetType(Integer))
+            dtTable.Columns.Add("Description", GetType(String))
 
-        cboEntity.DataSource = dtTable
-        cboEntity.DisplayMember = "Description"
-        cboEntity.ValueMember = "CompanyID"
+            While dr.Read
+                dtTable.Rows.Add(dr(0), dr(1))
+                'cboType.Items.Add(dr(0).ToString)
+                'cboType.Items.Add(dr(1).ToString)
+            End While
 
-        'Enable to draw
-        cboEntity.DrawMode = DrawMode.OwnerDrawFixed
+            cboEntity.DataSource = dtTable
+            cboEntity.DisplayMember = "Description"
+            cboEntity.ValueMember = "CompanyID"
 
-        'Fill cboAccount combobox
-        Dim cmd_account As New OleDbCommand("SELECT * FROM EACCNT", cnnOLEDB)
-        Dim dr_account As OleDbDataReader = cmd_account.ExecuteReader
-        Dim dtTable_account As DataTable = New DataTable()
-        dtTable_account.Columns.Add("AccountID", GetType(Integer))
-        dtTable_account.Columns.Add("Description", GetType(String))
+            'Enable to draw
+            cboEntity.DrawMode = DrawMode.OwnerDrawFixed
 
-        While dr_account.Read
-            dtTable_account.Rows.Add(dr_account(0), dr_account(1))
-        End While
+            'Fill cboAccount combobox
+            Dim cmd_account As New OleDbCommand("SELECT * FROM EACCNT", cnnOLEDB)
+            Dim dr_account As OleDbDataReader = cmd_account.ExecuteReader
+            Dim dtTable_account As DataTable = New DataTable()
+            dtTable_account.Columns.Add("AccountID", GetType(Integer))
+            dtTable_account.Columns.Add("Description", GetType(String))
 
-        cboAccount.DataSource = dtTable_account
-        cboAccount.DisplayMember = "Description"
-        cboAccount.ValueMember = "AccountID"
+            While dr_account.Read
+                dtTable_account.Rows.Add(dr_account(0), dr_account(1))
+            End While
 
-        'Enable to draw
-        cboAccount.DrawMode = DrawMode.OwnerDrawFixed
+            cboAccount.DataSource = dtTable_account
+            cboAccount.DisplayMember = "Description"
+            cboAccount.ValueMember = "AccountID"
 
-        dr.Close()
-        cnnOLEDB.Close()
+            'Enable to draw
+            cboAccount.DrawMode = DrawMode.OwnerDrawFixed
+
+            dr.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error Retrieving Record" & ex.Message, "Retrieve Record")
+        Finally
+            cnnOLEDB.Close()
+        End Try
     End Sub
 
     Private Sub tlsGuardar_Click(sender As Object, e As EventArgs) Handles tlsGuardar.Click
         Dim InsertQuery As String
 
-        ' Dim auto_increment As Integer
-        'Dim expDate As String
-        ' Dim entityId As Integer
-        ' Dim accountId As Integer
-        ' Dim amount As Double
-        ' Dim comments As String
-
-
         'If there are empty required fields don't to anything
         If (checkRequiredFields() = True) Then
+            Try
             cnnOLEDB.Open()
             'Variables to insert to database 
             'Most examples have the following statement
@@ -202,35 +178,29 @@ Public Class frm_Egresos
             + " VALUES (" & accountId & "," & entityId & "," & "'" & expDate & "'" & "," & amount & "," & "'" & comments & "'" & ")"
             Dim cmd As OleDbCommand = New OleDbCommand(InsertQuery, cnnOLEDB)
 
-
             cmdOLEDB = New OleDbCommand(InsertQuery, cnnOLEDB)
             cmdOLEDB.ExecuteNonQuery()
 
             cmd.CommandText = "SELECT @@identity"
-            auto_increment = cmd.ExecuteScalar()
-            cnnOLEDB.Close()
+                auto_increment = cmd.ExecuteScalar()
 
-            'update parent form
-            Dim new_item As New ListViewItem(auto_increment.ToString)
-            new_item.SubItems.Add(dtpDate.Text)
-            new_item.SubItems.Add(cboAccount.Text)
-            new_item.SubItems.Add(mtxtAmount.Text)
-            new_item.SubItems.Add(cboEntity.Text)
+                'update parent form
+                Dim new_item As New ListViewItem(auto_increment.ToString)
+                new_item.SubItems.Add(dtpDate.Text)
+                new_item.SubItems.Add(cboAccount.Text)
+                new_item.SubItems.Add(mtxtAmount.Text)
+                new_item.SubItems.Add(cboEntity.Text)
 
-            _ingMain.updateList(new_item)
+                _ingMain.updateList(new_item)
 
-            'Dim accountType As String
-            ' If (accountTypeId = 1) Then
-            ' accountType = "INCOME"
-            'Else
-            ' accountType = "EXPENSE"
-            'End If
-            'lstCategory.Items.Add(New ListViewItem(New String() {accountName, accountType}))
+                MsgBox("Transaction Saved!", MsgBoxStyle.Information, "Saved")
 
-            MsgBox("Transaction Saved!", MsgBoxStyle.Information, "Saved")
-
-            clearFields()
-
+                clearFields()
+            Catch   ex As Exception
+                MessageBox.Show("Error Saving Record" & ex.Message, "Save Record")
+            Finally
+                cnnOLEDB.Close()
+            End Try
 
         Else
             MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
@@ -251,11 +221,12 @@ Public Class frm_Egresos
     End Function
 
     Private Sub clearFields()
-
+        dtpDate.Text = ""
         cboEntity.Text = ""
         cboAccount.Text = ""
         mtxtAmount.Clear()
         txtComments.Text = ""
+        dtpDate.Focus()
     End Sub
 
     Public Sub fillFieldsToUpdate()
@@ -267,11 +238,6 @@ Public Class frm_Egresos
         lblUpdateWarning.Visible = True
         lblUpdateId.Text = fillId.ToString
         lblUpdateId.Visible = True
-
-        ' SELECT EEXPEN.ExpenseID, EEXPEN.ExpDate, EEXPEN.Amount
-        'FROM EEXPEN
-        'WHERE (([EEXPEN].[ExpenseID]=1));
-
         Try
             cnnOLEDB.Open()
 
@@ -286,11 +252,7 @@ Public Class frm_Egresos
                 cboAccount.SelectedValue = dr.Item("AccountID").ToString()
                 mtxtAmount.Text = FormatNumber(dr.Item("Amount"), 2)
                 txtComments.Text = dr.Item("Comments").ToString()
-                'mtxtDate.Text = FormatDateTime(txtDate, DateFormat.ShortDate)
-                'mtxtAmount.Text = 
-                'MsgBox(mtxtDate.Text)
-                'Dim new_item As New ListViewItem(dr.Item("CompanyID").ToString)
-                'new_item.SubItems.Add(dr.Item("Description").ToString)
+
             End While
 
             dr.Close()
@@ -331,12 +293,11 @@ Public Class frm_Egresos
     Public Sub getDataFromForm()
         updateId = Convert.ToInt32(lblUpdateId.Text)
         expDate = dtpDate.Value.ToString("MM/dd/yyyy")
-        ' CDate(dr.Item("ExpDate")).ToString(DateFormat)
-        'expDate = mtxtDate.Text
-        entityId = Convert.ToInt32(cboEntity.SelectedValue.ToString)
-        accountId = Convert.ToInt32(cboAccount.SelectedValue.ToString)
-        amount = Convert.ToDouble(mtxtAmount.Text.ToString)
+        entityId = Convert.ToInt32(cboEntity.SelectedValue)
+        accountId = Convert.ToInt32(cboAccount.SelectedValue)
+        amount = Convert.ToDouble(mtxtAmount.Text)
         comments = txtComments.Text
 
     End Sub
+
 End Class

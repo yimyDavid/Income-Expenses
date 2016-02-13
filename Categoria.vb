@@ -17,11 +17,9 @@ Public Class frm_Categoria
     Private Sub tlsGuardar_Click(sender As Object, e As EventArgs) Handles tlsGuardar.Click
         Dim InsertQuery As String
 
-
         Dim accountName As String
         Dim accountTypeId As Integer
        
-
         'If there are empty required fields don't to anything
         If (checkRequiredFields() = True) Then
             cnnOLEDB.Open()
@@ -80,8 +78,6 @@ Public Class frm_Categoria
 
         While dr.Read
             dtTable.Rows.Add(dr(0), dr(1))
-            'cboType.Items.Add(dr(0).ToString)
-            'cboType.Items.Add(dr(1).ToString)
         End While
 
         cboType.DataSource = dtTable
@@ -93,12 +89,8 @@ Public Class frm_Categoria
 
         dr.Close()
 
-
         Dim cmd_account As New OleDbCommand("SELECT * FROM EACCNT", cnnOLEDB)
         Dim dr_account As OleDbDataReader = cmd_account.ExecuteReader
-        ' Dim dtTable As DataTable = New DataTable()
-        'dtTable.Columns.Add("ID", GetType(Integer))
-        'dtTable.Columns.Add("Description", GetType(String))
 
         While dr_account.Read
             Dim new_item As New ListViewItem(dr_account.Item("Description").ToString)
@@ -109,7 +101,6 @@ Public Class frm_Categoria
             Else
                 new_item.SubItems.Add("EXPENSE")
             End If
-            'new_item.SubItems.Add(dr_account.Item("typeID").ToString)
             lstCategory.Items.Add(new_item)
         End While
 

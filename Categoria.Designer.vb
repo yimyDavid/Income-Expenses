@@ -27,14 +27,14 @@ Partial Class frm_Categoria
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtAccount = New System.Windows.Forms.TextBox()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.tlsNuevo = New System.Windows.Forms.ToolStripButton()
-        Me.tlsGuardar = New System.Windows.Forms.ToolStripButton()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cboType = New System.Windows.Forms.ComboBox()
-        Me.ETYPEBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.lstCategory = New System.Windows.Forms.ListView()
         Me.Account = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.tlsNuevo = New System.Windows.Forms.ToolStripButton()
+        Me.tlsGuardar = New System.Windows.Forms.ToolStripButton()
+        Me.ETYPEBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ToolStrip1.SuspendLayout()
         CType(Me.ETYPEBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -64,22 +64,6 @@ Partial Class frm_Categoria
         Me.ToolStrip1.TabIndex = 47
         Me.ToolStrip1.Text = "ToolStrip1"
         '
-        'tlsNuevo
-        '
-        Me.tlsNuevo.Image = CType(resources.GetObject("tlsNuevo.Image"), System.Drawing.Image)
-        Me.tlsNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tlsNuevo.Name = "tlsNuevo"
-        Me.tlsNuevo.Size = New System.Drawing.Size(62, 22)
-        Me.tlsNuevo.Text = "Nuevo"
-        '
-        'tlsGuardar
-        '
-        Me.tlsGuardar.Image = CType(resources.GetObject("tlsGuardar.Image"), System.Drawing.Image)
-        Me.tlsGuardar.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tlsGuardar.Name = "tlsGuardar"
-        Me.tlsGuardar.Size = New System.Drawing.Size(69, 22)
-        Me.tlsGuardar.Text = "Guardar"
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -99,10 +83,6 @@ Partial Class frm_Categoria
         Me.cboType.Size = New System.Drawing.Size(159, 21)
         Me.cboType.TabIndex = 49
         Me.cboType.ValueMember = "typeID"
-        '
-        'ETYPEBindingSource
-        '
-        Me.ETYPEBindingSource.DataMember = "ETYPE"
         '
         'lstCategory
         '
@@ -129,6 +109,26 @@ Partial Class frm_Categoria
         Me.Type.Text = "Type"
         Me.Type.Width = 101
         '
+        'tlsNuevo
+        '
+        Me.tlsNuevo.Image = CType(resources.GetObject("tlsNuevo.Image"), System.Drawing.Image)
+        Me.tlsNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tlsNuevo.Name = "tlsNuevo"
+        Me.tlsNuevo.Size = New System.Drawing.Size(62, 22)
+        Me.tlsNuevo.Text = "Nuevo"
+        '
+        'tlsGuardar
+        '
+        Me.tlsGuardar.Image = CType(resources.GetObject("tlsGuardar.Image"), System.Drawing.Image)
+        Me.tlsGuardar.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tlsGuardar.Name = "tlsGuardar"
+        Me.tlsGuardar.Size = New System.Drawing.Size(69, 22)
+        Me.tlsGuardar.Text = "Guardar"
+        '
+        'ETYPEBindingSource
+        '
+        Me.ETYPEBindingSource.DataMember = "ETYPE"
+        '
         'frm_Categoria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -141,7 +141,8 @@ Partial Class frm_Categoria
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.txtAccount)
         Me.Controls.Add(Me.Label1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "frm_Categoria"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
