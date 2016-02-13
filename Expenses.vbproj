@@ -46,10 +46,13 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -100,6 +103,20 @@
     <Compile Include="Empresa.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ExpensesDataSet2.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExpensesDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ExpensesDataSet2.vb">
+      <DependentUpon>ExpensesDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frmReports.Designer.vb">
+      <DependentUpon>frmReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IngrCateg.Designer.vb">
       <DependentUpon>IngrCateg.vb</DependentUpon>
     </Compile>
@@ -140,6 +157,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="rptTranViewer.Designer.vb">
+      <DependentUpon>rptTranViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="rptTranViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="about.resx">
@@ -156,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Empresa.resx">
       <DependentUpon>Empresa.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReports.resx">
+      <DependentUpon>frmReports.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IngrCateg.resx">
       <DependentUpon>IngrCateg.vb</DependentUpon>
@@ -175,9 +201,26 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="rptEntityDate.rdlc" />
+    <EmbeddedResource Include="rptAccountDate.rdlc" />
+    <EmbeddedResource Include="rptTransactions.rdlc" />
+    <EmbeddedResource Include="rptTranViewer.resx">
+      <DependentUpon>rptTranViewer.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ExpensesDataSet2.xsc">
+      <DependentUpon>ExpensesDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="ExpensesDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ExpensesDataSet2.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExpensesDataSet2.xss">
+      <DependentUpon>ExpensesDataSet2.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -230,6 +273,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Expenses.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

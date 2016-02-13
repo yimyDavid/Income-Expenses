@@ -38,6 +38,7 @@ Public Class IngMain
 
         selectQuery = "SELECT EEXPEN.ExpenseID, EEXPEN.ExpDate, EACCNT.Description, EEXPEN.Amount, ECOMP.Description " _
                       + "FROM (EEXPEN INNER JOIN EACCNT ON EEXPEN.AccountID = EACCNT.AccountID) INNER JOIN ECOMP ON EEXPEN.CompanyID = ECOMP.CompanyID"
+
         Dim cmd As New OleDbCommand(selectQuery, cnnOLEDB)
         Dim dr As OleDbDataReader = cmd.ExecuteReader
         Dim dtTable As DataTable = New DataTable()
@@ -51,13 +52,13 @@ Public Class IngMain
             formatAmount = Format(dr.Item("Amount"), "###,###.00")
             new_item.SubItems.Add(formatDate)
             new_item.SubItems.Add(dr.Item("EACCNT.Description").ToString)
-            'new_item.SubItems.Add(dr.Item("Amount").ToString)
+                'new_item.SubItems.Add(dr.Item("Amount").ToString)
             new_item.SubItems.Add(formatAmount)
 
             new_item.SubItems.Add(dr.Item("ECOMP.Description").ToString)
             lstTransactions.Items.Add(new_item)
 
-        End While
+            End While
 
         dr.Close()
         cnnOLEDB.Close()
@@ -168,6 +169,13 @@ Public Class IngMain
         frmEgresoToFill.tls_btnUpdate.Enabled = True
         frmEgresoToFill.tlsGuardar.Enabled = False
         frmEgresoToFill.tlsNuevo.Enabled = False
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim rptTran As New rptTranViewer(frmReports)
+        'set main form to be parent of frm_expense
+        rptTran.MdiParent = frm_Main
+        rptTran.Show()
     End Sub
 
 End Class

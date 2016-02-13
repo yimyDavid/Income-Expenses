@@ -89,4 +89,22 @@
             Me.Close()
         End If
     End Sub
+
+    Private Sub ByDateToolStripMenuItem_Click(sender As Object, e As EventArgs)
+        Dim frm_Report As New frmReports()
+
+        'Set parent for this form
+        frm_Report.MdiParent = Me
+        frm_Report.Show()
+
+    End Sub
+
+    Private Sub ReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReportsToolStripMenuItem.Click
+        Dim frm_Report As New frmReports()
+
+        'Set parent for this form
+        frm_Report.MdiParent = Me
+        frm_Report.Show()
+    End Sub
+
 End Class

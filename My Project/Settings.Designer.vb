@@ -63,6 +63,17 @@ Namespace My
                 Return CType(Me("ExpensesConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\bin\Debug\Expenses."& _ 
+            "accdb")>  _
+        Public ReadOnly Property ExpensesStrConn() As String
+            Get
+                Return CType(Me("ExpensesStrConn"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

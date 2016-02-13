@@ -31,6 +31,7 @@ Partial Class frm_Main
         Me.ClasificacionesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TiendaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TipoDeIngresoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProgramadorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlsBarMain = New System.Windows.Forms.ToolStrip()
         Me.tlsRecords = New System.Windows.Forms.ToolStripButton()
@@ -48,7 +49,7 @@ Partial Class frm_Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresosToolStripMenuItem, Me.ClasificacionesToolStripMenuItem, Me.ProgramadorToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresosToolStripMenuItem, Me.ClasificacionesToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.ProgramadorToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(567, 24)
@@ -95,14 +96,20 @@ Partial Class frm_Main
         'TiendaToolStripMenuItem
         '
         Me.TiendaToolStripMenuItem.Name = "TiendaToolStripMenuItem"
-        Me.TiendaToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.TiendaToolStripMenuItem.Size = New System.Drawing.Size(124, 22)
         Me.TiendaToolStripMenuItem.Text = "&Entities"
         '
         'TipoDeIngresoToolStripMenuItem
         '
         Me.TipoDeIngresoToolStripMenuItem.Name = "TipoDeIngresoToolStripMenuItem"
-        Me.TipoDeIngresoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.TipoDeIngresoToolStripMenuItem.Size = New System.Drawing.Size(124, 22)
         Me.TipoDeIngresoToolStripMenuItem.Text = "&Accounts"
+        '
+        'ReportsToolStripMenuItem
+        '
+        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
+        Me.ReportsToolStripMenuItem.Text = "Re&ports"
         '
         'ProgramadorToolStripMenuItem
         '
@@ -238,5 +245,6 @@ Partial Class frm_Main
     Friend WithEvents tlsEntity As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

@@ -6,7 +6,107 @@ Expenses
 </name>
 </assembly>
 <members>
-<member name="P:Expenses.My.Resources.Resources.ResourceManager">
+<member name="T:Expenses.ExpensesDataSet2.EACCNTDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.ECOMPDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.EEXPENDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.DataTable1DataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.EACCNTRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.ECOMPRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.EEXPENRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.DataTable1Row">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.EACCNTRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.ECOMPRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.EEXPENRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2.DataTable1RowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2TableAdapters.EACCNTTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2TableAdapters.ECOMPTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2TableAdapters.EEXPENTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2TableAdapters.DataTable1TableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="M:Expenses.ExpensesDataSet2TableAdapters.TableAdapterManager.UpdateUpdatedRows(Expenses.ExpensesDataSet2,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Update rows in top-down order.
+</summary>
+</member><member name="M:Expenses.ExpensesDataSet2TableAdapters.TableAdapterManager.UpdateInsertedRows(Expenses.ExpensesDataSet2,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Insert rows in top-down order.
+</summary>
+</member><member name="M:Expenses.ExpensesDataSet2TableAdapters.TableAdapterManager.UpdateDeletedRows(Expenses.ExpensesDataSet2,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Delete rows in bottom-up order.
+</summary>
+</member><member name="M:Expenses.ExpensesDataSet2TableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member><member name="M:Expenses.ExpensesDataSet2TableAdapters.TableAdapterManager.UpdateAll(Expenses.ExpensesDataSet2)">
+	<summary>
+Update all changes to the dataset.
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2TableAdapters.TableAdapterManager.UpdateOrderOption">
+	<summary>
+Update Order Option
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2TableAdapters.TableAdapterManager.SelfReferenceComparer">
+	<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member><member name="T:Expenses.ExpensesDataSet2TableAdapters.TableAdapterManager">
+	<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member><member name="P:Expenses.My.Resources.Resources.ResourceManager">
 	<summary>
   Returns the cached ResourceManager instance used by this class.
 </summary>
