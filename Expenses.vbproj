@@ -85,6 +85,7 @@
     <Compile Include="Categoria.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DBControl.vb" />
     <Compile Include="EgrMain.Designer.vb">
       <DependentUpon>EgrMain.vb</DependentUpon>
     </Compile>
@@ -115,12 +116,6 @@
       <DependentUpon>frmReports.vb</DependentUpon>
     </Compile>
     <Compile Include="frmReports.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="IngrCateg.Designer.vb">
-      <DependentUpon>IngrCateg.vb</DependentUpon>
-    </Compile>
-    <Compile Include="IngrCateg.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IngrMain.Designer.vb">
@@ -163,6 +158,12 @@
     <Compile Include="rptTranViewer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="test.Designer.vb">
+      <DependentUpon>test.vb</DependentUpon>
+    </Compile>
+    <Compile Include="test.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="about.resx">
@@ -182,9 +183,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReports.resx">
       <DependentUpon>frmReports.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="IngrCateg.resx">
-      <DependentUpon>IngrCateg.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IngrMain.resx">
       <DependentUpon>IngrMain.vb</DependentUpon>
@@ -206,6 +204,9 @@
     <EmbeddedResource Include="rptTransactions.rdlc" />
     <EmbeddedResource Include="rptTranViewer.resx">
       <DependentUpon>rptTranViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="test.resx">
+      <DependentUpon>test.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

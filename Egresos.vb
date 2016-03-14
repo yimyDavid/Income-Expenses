@@ -257,7 +257,8 @@ Public Class frm_Egresos
 
             dr.Close()
         Catch ex As Exception
-            MessageBox.Show("Error Retrieving Record" & ex.Message, "Retrieve Record")
+            MessageBox.Show("Select a Record from the list to edit", "Retrieve Record")
+            Me.Close()
         Finally
 
             cnnOLEDB.Close()

@@ -12,7 +12,6 @@ F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Main.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Categoria.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Egresos.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Empresa.resources
-F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_IngrCateg.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.IngMain.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.IngrMain.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frmAbout.resources
@@ -22,3 +21,4 @@ F:\UMASS\CS410\Expenses\obj\Debug\RdlCompile.compiled
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.rptTranViewer.resources
 F:\UMASS\CS410\Expenses\bin\Debug\Expenses.accdb
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frmReports.resources
+F:\UMASS\CS410\Expenses\obj\Debug\Expenses.test.resources

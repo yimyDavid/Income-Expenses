@@ -1,5 +1,7 @@
 ﻿Imports System.Data.OleDb
 Public Class frm_Categoria
+    Private Access As New DBControl
+
 
     Dim cnnOLEDB As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Expenses.accdb;")
     Dim cmdOLEDB As New OleDbCommand

@@ -74,7 +74,7 @@ Partial Class IngMain
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
         Me.ToolStripButton1.Size = New System.Drawing.Size(28, 28)
-        Me.ToolStripButton1.Text = "Nuevo"
+        Me.ToolStripButton1.Text = "Create New Record"
         Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'ToolStripSeparator1
@@ -89,7 +89,7 @@ Partial Class IngMain
         Me.tls_btnUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tls_btnUpdate.Name = "tls_btnUpdate"
         Me.tls_btnUpdate.Size = New System.Drawing.Size(28, 28)
-        Me.tls_btnUpdate.Text = "ToolStripButton2"
+        Me.tls_btnUpdate.Text = "Edit Record"
         '
         'ToolStripSeparator2
         '
@@ -103,7 +103,7 @@ Partial Class IngMain
         Me.tls_btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tls_btnDelete.Name = "tls_btnDelete"
         Me.tls_btnDelete.Size = New System.Drawing.Size(28, 28)
-        Me.tls_btnDelete.Text = "ToolStripButton3"
+        Me.tls_btnDelete.Text = "Delete One Record"
         '
         'lstTransactions
         '

@@ -153,7 +153,6 @@ Public Class IngMain
 
     End Sub
 
-
     Public Function getId()
         Return txtId.Text
     End Function
@@ -170,4 +169,7 @@ Public Class IngMain
         frmEgresoToFill.tlsNuevo.Enabled = False
     End Sub
 
+    Private Sub ToolStripTextBox1_Click(sender As Object, e As EventArgs) Handles ToolStripTextBox1.Click
+
+    End Sub
 End Class

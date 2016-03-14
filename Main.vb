@@ -75,8 +75,8 @@
     End Sub
 
     Private Sub ProgramadorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProgramadorToolStripMenuItem.Click
-        Dim frm_About As New frmAbout()
-
+        'Dim frm_About As New frmAbout()
+        Dim frm_About As New test()
         'Set parent for this form
         frm_About.MdiParent = Me
         frm_About.Show()
