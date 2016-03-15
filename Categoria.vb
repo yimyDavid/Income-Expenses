@@ -1,11 +1,9 @@
-﻿Imports System.Data.OleDb
+﻿
 Public Class frm_Categoria
-    Private Access As New DBControl
+    Private dbAccess As New DBControl
 
+    Private idAccount As String = -1
 
-    Dim cnnOLEDB As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Expenses.accdb;")
-    Dim cmdOLEDB As New OleDbCommand
-    Dim cmdInsert As New OleDbCommand
 
     Private Sub tlsNuevo_Click(sender As Object, e As EventArgs) Handles tlsNuevo.Click
         clearFields()
@@ -15,99 +13,81 @@ Public Class frm_Categoria
         txtAccount.Text = ""
         txtAccount.Focus()
     End Sub
+    Private Sub addCategory()
 
-    Private Sub tlsGuardar_Click(sender As Object, e As EventArgs) Handles tlsGuardar.Click
-        Dim InsertQuery As String
+        dbAccess.AddParam("@description", txtAccount.Text)
+        dbAccess.AddParam("@type", cboType.SelectedValue)
 
-        Dim accountName As String
-        Dim accountTypeId As Integer
-       
-        'If there are empty required fields don't to anything
-        If (checkRequiredFields() = True) Then
-            cnnOLEDB.Open()
-            'Variables to insert to database
-            accountName = txtAccount.Text
-            accountTypeId = Convert.ToInt32(cboType.SelectedValue.ToString)
+        dbAccess.ExecQuery("INSERT INTO EACCNT (Description, typeID) " & _
+                           "VALUES (@description, @type); ")
 
-            'Most examples have the following statement
-            'cmd.Parameters.AddWithValue("@id", 1) but it didn't work for me sofar I decided to do 
-            'the following
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
 
-            InsertQuery = "INSERT INTO [EACCNT] ([Description],[typeID]) VALUES (" & "'" & accountName & "'" & "," & accountTypeId & ")"
-            Dim cmd As OleDbCommand = New OleDbCommand(InsertQuery, cnnOLEDB)
-
-
-            cmdOLEDB = New OleDbCommand(InsertQuery, cnnOLEDB)
-            cmdOLEDB.ExecuteNonQuery()
-            cnnOLEDB.Close()
-
-            Dim accountType As String
-            If (accountTypeId = 1) Then
-                accountType = "INCOME"
-            Else
-                accountType = "EXPENSE"
-            End If
-            lstCategory.Items.Add(New ListViewItem(New String() {accountName, accountType}))
-
-            MsgBox("Account Saved!", MsgBoxStyle.Information, "Saved")
-
-            clearFields()
-            txtAccount.Focus()
-
-        Else
-            MsgBox("Fill the Required Fields before Saving!", MsgBoxStyle.Critical, "Empty Required Fields")
-        End If
+        MsgBox("Saved Successfully")
 
     End Sub
 
+    Private Sub tlsGuardar_Click(sender As Object, e As EventArgs) Handles tlsGuardar.Click
+        
+        If (checkRequiredFields() = False) Then Exit Sub
+        ' Add New Record to Database Table
+        addCategory()
+
+        lstCategory.Items.Add(New ListViewItem(New String() {txtAccount.Text, cboType.SelectedText}))
+
+        clearFields()
+
+        ' Else
+        ' MsgBox("Fill the Required Fields before Saving!", MsgBoxStyle.Critical, "Empty Required Fields")
+        ' End If
+
+    End Sub
+
+    Private Sub fillCboType()
+        dbAccess.ExecQuery("SELECT * FROM ETYPE; ")
+
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
+
+        cboType.DataSource = dbAccess.DBDT
+
+        cboType.DisplayMember = "Description"
+        cboType.ValueMember = "typeID"
+
+        'Enable to draw
+        cboType.DrawMode = DrawMode.OwnerDrawFixed
+    End Sub
+
+    Private Sub fillList()
+        dbAccess.ExecQuery("SELECT EACCNT.AccountID, EACCNT.Description As AccDesc, ETYPE.Description As typeDesc " & _
+                           "FROM EACCNT INNER JOIN ETYPE " & _
+                           "ON EACCNT.TypeID = ETYPE.typeID; ")
+
+
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
+
+        For Each R As DataRow In dbAccess.DBDT.Rows
+            Dim new_row As New ListViewItem(R("AccDesc").ToString)
+            new_row.SubItems.Add(R("typeDesc").ToString)
+            new_row.SubItems.Add(R("AccountID").ToString)
+            lstCategory.Items.Add(new_row)
+        Next
+    End Sub
     Private Function checkRequiredFields()
         Dim empty As Boolean
         If ((txtAccount.Text = "") Or
             (cboType.Text = "")) Then
             empty = False
+            MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
             Return empty
         End If
         Return True
     End Function
 
     Private Sub frm_Categoria_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cnnOLEDB.Open()
-        Dim cmd As New OleDbCommand("SELECT * FROM ETYPE", cnnOLEDB)
-        Dim dr As OleDbDataReader = cmd.ExecuteReader
-        Dim dtTable As DataTable = New DataTable()
-        dtTable.Columns.Add("ID", GetType(Integer))
-        dtTable.Columns.Add("Name", GetType(String))
 
-        While dr.Read
-            dtTable.Rows.Add(dr(0), dr(1))
-        End While
+        fillCboType()
 
-        cboType.DataSource = dtTable
-        cboType.DisplayMember = "Name"
-        cboType.ValueMember = "ID"
-
-        'Enable to draw
-        cboType.DrawMode = DrawMode.OwnerDrawFixed
-
-        dr.Close()
-
-        Dim cmd_account As New OleDbCommand("SELECT * FROM EACCNT", cnnOLEDB)
-        Dim dr_account As OleDbDataReader = cmd_account.ExecuteReader
-
-        While dr_account.Read
-            Dim new_item As New ListViewItem(dr_account.Item("Description").ToString)
-            'checks the type of account. Since the EACCNT table only stores the number id of account I wanted
-            'show the listview with the actual description "EXPENSE" or "INCOME"
-            If (dr_account.Item("typeID").ToString = "1") Then
-                new_item.SubItems.Add("INCOME")
-            Else
-                new_item.SubItems.Add("EXPENSE")
-            End If
-            lstCategory.Items.Add(new_item)
-        End While
-
-        dr_account.Close()
-        cnnOLEDB.Close()
+        fillList()
     End Sub
 
     Private Sub cboType_DrawItem(ByVal sender As System.Object, _
@@ -121,8 +101,8 @@ Public Class frm_Categoria
         Dim drv As DataRowView = CType(cboType.Items(e.Index), DataRowView)
 
         'Retrieve the value of each column
-        Dim id As Integer = drv("ID").ToString()
-        Dim name As String = drv("Name").ToString()
+        Dim id As Integer = drv("typeID").ToString()
+        Dim name As String = drv("Description").ToString()
 
         'Get the bounds for the first column
         Dim r1 As Rectangle = e.Bounds
@@ -149,6 +129,38 @@ Public Class frm_Categoria
         End Using
 
     End Sub
+    Private Sub deleteRecord()
+        dbAccess.AddParam("@accountId", idAccount)
+
+        dbAccess.ExecQuery("DELETE FROM EACCNT WHERE AccountID = @accountId; ")
+        ' This will make the following to execute if it fails to access the db.
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+
+        Dim Answer As Integer
+        If (idAccount >= 0) Then
+            Answer = MsgBox("All Records Associated with this Account will also be Deleted" + vbCrLf + _
+                            "Would you like to Continue?", MsgBoxStyle.YesNo + vbExclamation, "Delete Record")
+        Else
+            MsgBox("Select Record from the list first", MsgBoxStyle.Information, "Select Record")
+        End If
+
+        If (Answer = vbYes And idAccount >= 0) Then
+            deleteRecord()
+            idAccount = -1
+        End If
 
 
+     
+
+    End Sub
+
+    Private Sub lstCategory_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles lstCategory.ItemSelectionChanged
+        If e.IsSelected Then
+            idAccount = lstCategory.FocusedItem.SubItems(2).Text
+
+        End If
+    End Sub
 End Class

@@ -15,6 +15,7 @@ Public Class DBControl
     ' Query Statistics
     Public RecordCount As Integer
     Public Exception As String
+    Public auto_increment_value As Integer
 
     Public Sub ExecQuery(Query As String)
         ' Reset Query Statistics
@@ -27,7 +28,9 @@ Public Class DBControl
 
             ' Create Database Command
             DBCmd = New OleDbCommand(Query, DBCon)
+           
 
+           
             ' Load Params into DB Command
             Params.ForEach(Sub(p) DBCmd.Parameters.Add(p))
             ' Does the same thing but differently
@@ -35,6 +38,7 @@ Public Class DBControl
             'DBCmd.Parameters.Add(p)
             'Next
 
+          
             ' Clear params List
             Params.Clear()
 
@@ -42,10 +46,17 @@ Public Class DBControl
             DBDT = New DataTable
             DBDA = New OleDbDataAdapter(DBCmd)
 
+           
+            
             'pipes data into dataTable
             RecordCount = DBDA.Fill(DBDT)
+
+            ' Query to get auto_increment value.
+            ' It needs to be here so the previous query can execute first.
+            DBCmd.CommandText = "SELECT @@identity"
+            auto_increment_value = DBCmd.ExecuteScalar
         Catch ex As Exception
-            Exception = ex.Message
+            Exception = ex.Message & vbNewLine & "Contact the Developer at yimysol@gmail.com"
         End Try
 
         ' Close this connection

@@ -1,19 +1,17 @@
-﻿Imports System.Data.OleDb
-
+﻿
 Public Class frm_Egresos
-    Dim cnnOLEDB As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Expenses.accdb;")
-    Dim cmdOLEDB As New OleDbCommand
-    Dim cmdInsert As New OleDbCommand
+    Private dbAccess As New DBControl
+
     Private _ingMain As IngMain
     Private _frm_Main As frm_Main
 
-    Dim auto_increment As Integer
+    'Dim auto_increment As Integer
     Dim updateId As Integer
-    Dim expDate As String
-    Dim entityId As Integer
-    Dim accountId As Integer
-    Dim amount As Double
-    Dim comments As String
+    ' Dim expDate As String
+    'Dim entityId As Integer
+    'Dim accountId As Integer
+    'Dim amount As Double
+    ' Dim comments As String
 
     Sub New(ByVal mainEgr As IngMain)
         InitializeComponent()
@@ -28,7 +26,7 @@ Public Class frm_Egresos
     End Sub
 
 
-    
+
     Private Sub tlsNuevo_Click(sender As Object, e As EventArgs) Handles tlsNuevo.Click
         clearFields()
 
@@ -111,112 +109,89 @@ Public Class frm_Egresos
             e.Graphics.DrawString(name, e.Font, sb, r2)
         End Using
     End Sub
+    Private Sub fillCboEntity()
+        dbAccess.ExecQuery("SELECT * FROM ECOMP; ")
+
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
+
+        cboEntity.DataSource = dbAccess.DBDT
+
+        cboEntity.DisplayMember = "Description"
+        cboEntity.ValueMember = "CompanyID"
+
+        'Enable to draw
+        cboEntity.DrawMode = DrawMode.OwnerDrawFixed
+    End Sub
+
+    Private Sub fillCboAccount()
+        dbAccess.ExecQuery("SELECT * FROM EACCNT; ")
+
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
+
+        cboAccount.DataSource = dbAccess.DBDT
+
+        cboAccount.DisplayMember = "Description"
+        cboAccount.ValueMember = "AccountID"
+
+        'Enable to draw
+        cboAccount.DrawMode = DrawMode.OwnerDrawFixed
+    End Sub
 
     Private Sub frm_Egresos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Try
-            cnnOLEDB.Open()
-            Dim cmd As New OleDbCommand("SELECT * FROM ECOMP", cnnOLEDB)
-            Dim dr As OleDbDataReader = cmd.ExecuteReader
-            Dim dtTable As DataTable = New DataTable()
-            dtTable.Columns.Add("CompanyID", GetType(Integer))
-            dtTable.Columns.Add("Description", GetType(String))
+        fillCboAccount()
+        fillCboEntity()
 
-            While dr.Read
-                dtTable.Rows.Add(dr(0), dr(1))
-                'cboType.Items.Add(dr(0).ToString)
-                'cboType.Items.Add(dr(1).ToString)
-            End While
+    End Sub
 
-            cboEntity.DataSource = dtTable
-            cboEntity.DisplayMember = "Description"
-            cboEntity.ValueMember = "CompanyID"
+    Private Sub addTransaction()
+        dbAccess.AddParam("@accountId", cboAccount.SelectedValue)
+        dbAccess.AddParam("@companyId", cboEntity.SelectedValue)
+        dbAccess.AddParam("@expDate", dtpDate.Text)
+        dbAccess.AddParam("@amout", mtxtAmount.Text)
+        dbAccess.AddParam("@comments", txtComments.Text)
 
-            'Enable to draw
-            cboEntity.DrawMode = DrawMode.OwnerDrawFixed
+        dbAccess.ExecQuery("INSERT INTO EEXPEN (AccountID, CompanyID, ExpDate, Amount, Comments) " & _
+                           "VALUES (@accountId, @companyId, @expDate,@amount, @comments); ")
 
-            'Fill cboAccount combobox
-            Dim cmd_account As New OleDbCommand("SELECT * FROM EACCNT", cnnOLEDB)
-            Dim dr_account As OleDbDataReader = cmd_account.ExecuteReader
-            Dim dtTable_account As DataTable = New DataTable()
-            dtTable_account.Columns.Add("AccountID", GetType(Integer))
-            dtTable_account.Columns.Add("Description", GetType(String))
-
-            While dr_account.Read
-                dtTable_account.Rows.Add(dr_account(0), dr_account(1))
-            End While
-
-            cboAccount.DataSource = dtTable_account
-            cboAccount.DisplayMember = "Description"
-            cboAccount.ValueMember = "AccountID"
-
-            'Enable to draw
-            cboAccount.DrawMode = DrawMode.OwnerDrawFixed
-
-            dr.Close()
-        Catch ex As Exception
-            MessageBox.Show("Error Retrieving Record" & ex.Message, "Retrieve Record")
-        Finally
-            cnnOLEDB.Close()
-        End Try
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
     End Sub
 
     Private Sub tlsGuardar_Click(sender As Object, e As EventArgs) Handles tlsGuardar.Click
-        Dim InsertQuery As String
+      
+        If (checkRequiredFields() = False) Then Exit Sub
 
-        'If there are empty required fields don't to anything
-        If (checkRequiredFields() = True) Then
-            Try
-            cnnOLEDB.Open()
-            'Variables to insert to database 
-            'Most examples have the following statement
-            'cmd.Parameters.AddWithValue("@id", 1) but it didn't work for me sofar I decided to do 
-            'the following
-            getDataFromForm()
+        addTransaction()
 
-            InsertQuery = "INSERT INTO [EEXPEN] ([AccountID],[CompanyID],[ExpDate],[Amount],[Comments]) " _
-            + " VALUES (" & accountId & "," & entityId & "," & "'" & expDate & "'" & "," & amount & "," & "'" & comments & "'" & ")"
-            Dim cmd As OleDbCommand = New OleDbCommand(InsertQuery, cnnOLEDB)
+        ' getDataFromForm()
 
-            cmdOLEDB = New OleDbCommand(InsertQuery, cnnOLEDB)
-            cmdOLEDB.ExecuteNonQuery()
+        Dim new_item As New ListViewItem(dbAccess.auto_increment_value)
+        new_item.SubItems.Add(dtpDate.Text)
+        new_item.SubItems.Add(cboAccount.Text)
+        new_item.SubItems.Add(mtxtAmount.Text)
+        new_item.SubItems.Add(cboEntity.Text)
 
-            cmd.CommandText = "SELECT @@identity"
-                auto_increment = cmd.ExecuteScalar()
+        _ingMain.updateList(new_item)
 
-                'update parent form
-                Dim new_item As New ListViewItem(auto_increment.ToString)
-                new_item.SubItems.Add(dtpDate.Text)
-                new_item.SubItems.Add(cboAccount.Text)
-                new_item.SubItems.Add(mtxtAmount.Text)
-                new_item.SubItems.Add(cboEntity.Text)
+        clearFields()
 
-                _ingMain.updateList(new_item)
-
-                MsgBox("Transaction Saved!", MsgBoxStyle.Information, "Saved")
-
-                clearFields()
-            Catch   ex As Exception
-                MessageBox.Show("Error Saving Record" & ex.Message, "Save Record")
-            Finally
-                cnnOLEDB.Close()
-            End Try
-
-        Else
-            MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
-        End If
+        ' Else
+        '    MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
+        ' End If
 
     End Sub
 
     Private Function checkRequiredFields()
         Dim empty As Boolean
+        empty = True
         If (cboEntity.Text = "") Or
             (cboAccount.Text = "") Or
-            (mtxtAmount.Text = "") Then
+            (mtxtAmount.Text = "" Or IsNumeric(mtxtAmount.Text) = False) Then
             empty = False
+            MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
             'Return empty
         End If
-        empty = IsNumeric(mtxtAmount.Text)
+        ' empty = IsNumeric(mtxtAmount.Text)
         Return empty
     End Function
 
@@ -230,75 +205,66 @@ Public Class frm_Egresos
     End Sub
 
     Public Sub fillFieldsToUpdate()
+
         Dim fillId As String
         fillId = _ingMain.getId()
-        'MsgBox("BEFORE QUERY " & updateId)
-        Dim dateFormat As String = "MM/dd/yyyy"
+
+        dbAccess.AddParam("@fillId", fillId)
+
+        dbAccess.ExecQuery("SELECT * FROM EEXPEN WHERE ExpenseID = @fillId; ")
+
+        If dbAccess.DBDT.Rows.Count < 1 Then Exit Sub
 
         lblUpdateWarning.Visible = True
         lblUpdateId.Text = fillId.ToString
         lblUpdateId.Visible = True
-        Try
-            cnnOLEDB.Open()
+      
+        Dim r As DataRow = dbAccess.DBDT.Rows(0)
 
-            cmdOLEDB = New OleDbCommand("SELECT * FROM EEXPEN WHERE ExpenseID = " & fillId, cnnOLEDB)
-            'cmd.ExecuteNonQuery()
-            Dim dr As OleDbDataReader = cmdOLEDB.ExecuteReader
+        dtpDate.Text = r("expDate").ToString
+        cboEntity.SelectedValue = r("CompanyID").ToString
+        cboAccount.SelectedValue = r("AccountID").ToString
+        mtxtAmount.Text = r("Amount").ToString
+        txtComments.Text = r("Comments").ToString
 
-            While dr.Read
-                'mtxtDate.Text = CDate(dr.Item("ExpDate")).ToString(dateFormat)
-                dtpDate.Text = CDate(dr.Item("ExpDate")).ToString(dateFormat)
-                cboEntity.SelectedValue = dr.Item("CompanyID").ToString()
-                cboAccount.SelectedValue = dr.Item("AccountID").ToString()
-                mtxtAmount.Text = FormatNumber(dr.Item("Amount"), 2)
-                txtComments.Text = dr.Item("Comments").ToString()
-
-            End While
-
-            dr.Close()
-        Catch ex As Exception
-            MessageBox.Show("Select a Record from the list to edit", "Retrieve Record")
-            Me.Close()
-        Finally
-
-            cnnOLEDB.Close()
-
-        End Try
     End Sub
 
     Private Sub tls_btnUpdate_Click(sender As Object, e As EventArgs) Handles tls_btnUpdate.Click
 
-        'Dim updateListViewData As ListViewItem
-        Try
-            getDataFromForm()
-            cnnOLEDB.Open()
+          If (checkRequiredFields() = False) Then Exit Sub
 
-            cmdOLEDB = New OleDbCommand("UPDATE EEXPEN SET AccountID = " & accountId & ", CompanyID = " & entityId & ", ExpDate = " & "'" & expDate & "'" & ", Amount = " & amount & ", Comments = " & "'" & comments & "'" & " WHERE ExpenseID=" & updateId, cnnOLEDB)
-            cmdOLEDB.ExecuteNonQuery()
-
-            'update parent form
-            Dim updateItem As New ListViewItem(updateId.ToString)
-            updateItem.SubItems.Add(dtpDate.Text)
-            updateItem.SubItems.Add(cboAccount.Text)
-            updateItem.SubItems.Add(mtxtAmount.Text)
-            updateItem.SubItems.Add(cboEntity.Text)
-
-            _ingMain.updateList(updateItem)
-        Catch ex As Exception
-            MessageBox.Show("Error Updating Record" & ex.Message, "Update Record")
-        Finally
-            cnnOLEDB.Close()
-        End Try
-    End Sub
-
-    Public Sub getDataFromForm()
-        updateId = Convert.ToInt32(lblUpdateId.Text)
-        expDate = dtpDate.Value.ToString("MM/dd/yyyy")
-        entityId = Convert.ToInt32(cboEntity.SelectedValue)
-        accountId = Convert.ToInt32(cboAccount.SelectedValue)
-        amount = Convert.ToDouble(mtxtAmount.Text)
-        comments = txtComments.Text
+        updateRecord()
 
     End Sub
 
+    Private Sub updateRecord()
+
+        updateId = _ingMain.getId()
+        dbAccess.AddParam("@accountId", cboAccount.SelectedValue)
+        dbAccess.AddParam("@companyId", cboEntity.SelectedValue)
+        dbAccess.AddParam("@expDate", dtpDate.Text)
+        dbAccess.AddParam("@amount", mtxtAmount.Text)
+        dbAccess.AddParam("@comments", txtComments.Text)
+        dbAccess.AddParam("@updateId", updateId)
+
+        dbAccess.ExecQuery("UPDATE EEXPEN " & _
+                           "SET AccountID = @accountId, CompanyID = @companyId, expDate = @expDate, Amount = @amount, Comments = @comments " & _
+                           "WHERE ExpenseID = @updateId; ")
+
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
+
+        fillParentList()
+    End Sub
+
+    Private Sub fillParentList()
+        ' update parent form
+        Dim updateItem As New ListViewItem(updateId.ToString)
+        updateItem.SubItems.Add(dtpDate.Text)
+        updateItem.SubItems.Add(cboAccount.Text)
+        updateItem.SubItems.Add(mtxtAmount.Text)
+        updateItem.SubItems.Add(cboEntity.Text)
+
+        _ingMain.updateList(updateItem)
+
+    End Sub
 End Class

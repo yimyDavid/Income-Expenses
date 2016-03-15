@@ -34,7 +34,9 @@ Partial Class frm_Categoria
         Me.Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.tlsNuevo = New System.Windows.Forms.ToolStripButton()
         Me.tlsGuardar = New System.Windows.Forms.ToolStripButton()
+        Me.btnDelete = New System.Windows.Forms.ToolStripButton()
         Me.ETYPEBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.accId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ToolStrip1.SuspendLayout()
         CType(Me.ETYPEBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -57,7 +59,7 @@ Partial Class frm_Categoria
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar, Me.btnDelete})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(397, 25)
@@ -86,7 +88,7 @@ Partial Class frm_Categoria
         '
         'lstCategory
         '
-        Me.lstCategory.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Account, Me.Type})
+        Me.lstCategory.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Account, Me.Type, Me.accId})
         Me.lstCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.lstCategory.FullRowSelect = True
         Me.lstCategory.GridLines = True
@@ -125,9 +127,21 @@ Partial Class frm_Categoria
         Me.tlsGuardar.Size = New System.Drawing.Size(69, 22)
         Me.tlsGuardar.Text = "Guardar"
         '
+        'btnDelete
+        '
+        Me.btnDelete.Image = Global.Expenses.My.Resources.Resources.delete
+        Me.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(70, 22)
+        Me.btnDelete.Text = "Eliminar"
+        '
         'ETYPEBindingSource
         '
         Me.ETYPEBindingSource.DataMember = "ETYPE"
+        '
+        'accId
+        '
+        Me.accId.Text = "iD"
         '
         'frm_Categoria
         '
@@ -166,5 +180,7 @@ Partial Class frm_Categoria
     Friend WithEvents lstCategory As System.Windows.Forms.ListView
     Friend WithEvents Account As System.Windows.Forms.ColumnHeader
     Friend WithEvents Type As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnDelete As System.Windows.Forms.ToolStripButton
+    Friend WithEvents accId As System.Windows.Forms.ColumnHeader
 
 End Class

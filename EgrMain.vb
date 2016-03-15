@@ -1,10 +1,8 @@
-﻿Imports System.Data.OleDb
-
-
+﻿
 Public Class IngMain
-    Dim cnnOLEDB As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Expenses.accdb;")
-    Dim cmdOLEDB As New OleDbCommand
-    Dim cmdInsert As New OleDbCommand
+    Private dbAccess As New DBControl
+
+  
 
     Dim deleteId As String = -1
     Dim deleteRecord As String
@@ -32,42 +30,32 @@ Public Class IngMain
 
     End Sub
 
+    Private Sub fillList()
+        dbAccess.ExecQuery("SELECT EEXPEN.ExpenseID, EEXPEN.ExpDate, EACCNT.Description, EEXPEN.Amount, ECOMP.Description " & _
+                           "FROM (EEXPEN INNER JOIN EACCNT ON EEXPEN.AccountID = EACCNT.AccountID) " & _
+                           "INNER JOIN ECOMP ON EEXPEN.CompanyID = ECOMP.CompanyID; ")
+
+        ' This will make the following to execute if it fails to access the db.
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
+
+
+        For Each R As DataRow In dbAccess.DBDT.Rows
+            Dim new_row As New ListViewItem(R("ExpenseID").ToString)
+            new_row.SubItems.Add(Format(R("ExpDate"), "MM/dd/yyyy"))
+            new_row.SubItems.Add(R("EACCNT.Description").ToString)
+            new_row.SubItems.Add(Format(R("Amount"), "###,###.00"))
+
+            new_row.SubItems.Add(R("ECOMP.Description").ToString)
+            lstTransactions.Items.Add(new_row)
+        Next
+
+    End Sub
+
+
     Private Sub IngMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Try
-            cnnOLEDB.Open()
-            Dim selectQuery As String
-
-            selectQuery = "SELECT EEXPEN.ExpenseID, EEXPEN.ExpDate, EACCNT.Description, EEXPEN.Amount, ECOMP.Description " _
-                          + "FROM (EEXPEN INNER JOIN EACCNT ON EEXPEN.AccountID = EACCNT.AccountID) INNER JOIN ECOMP ON EEXPEN.CompanyID = ECOMP.CompanyID"
-
-            Dim cmd As New OleDbCommand(selectQuery, cnnOLEDB)
-            Dim dr As OleDbDataReader = cmd.ExecuteReader
-            Dim dtTable As DataTable = New DataTable()
-            dtTable.Columns.Add("ID", GetType(Integer))
-            dtTable.Columns.Add("Description", GetType(String))
-            While dr.Read
-                Dim formatDate As String
-                Dim formatAmount As String
-                Dim new_item As New ListViewItem(dr.Item("ExpenseID").ToString)
-                formatDate = Format(dr.Item("ExpDate"), "MM/dd/yyyy")
-                formatAmount = Format(dr.Item("Amount"), "###,###.00")
-                new_item.SubItems.Add(formatDate)
-                new_item.SubItems.Add(dr.Item("EACCNT.Description").ToString)
-                'new_item.SubItems.Add(dr.Item("Amount").ToString)
-                new_item.SubItems.Add(formatAmount)
-
-                new_item.SubItems.Add(dr.Item("ECOMP.Description").ToString)
-                lstTransactions.Items.Add(new_item)
-
-            End While
-
-            dr.Close()
-        Catch ex As Exception
-            MessageBox.Show("Error fetching data" & ex.Message, "Fetching Error")
-        Finally
-            cnnOLEDB.Close()
-        End Try
+        fillList()
+       
     End Sub
 
     Public Sub updateList(detailList As ListViewItem)
@@ -91,33 +79,26 @@ Public Class IngMain
     Public Sub refreshListView(updateID As Integer)
         Dim findItem() As ListViewItem
         findItem = lstTransactions.Items.Find(updateID.ToString, False)
+
+    End Sub
+
+
+    Private Sub deleteItemFromList()
+
+        dbAccess.AddParam("@deleteId", deleteId)
+        dbAccess.ExecQuery("DELETE FROM EEXPEN WHERE ExpenseID = @deleteId; ")
+
+        ' This will make the following to execute if it fails to access the db.
+        If Not String.IsNullOrEmpty(dbAccess.Exception) Then MsgBox(dbAccess.Exception) : Exit Sub
       
-    End Sub
+        lstTransactions.FocusedItem.Remove()
+        lstTransactions.Refresh()
 
-    Public Sub deleteItemFromList()
-        Dim deleteQuery As String
-
-        Try
-            cnnOLEDB.Open()
-
-            deleteQuery = "DELETE FROM EEXPEN WHERE ExpenseID = " & deleteId & ""
-            ' Dim cmd As New OleDbCommand(deleteQuery, cnnOLEDB)
-
-            cmdOLEDB = New OleDbCommand(deleteQuery, cnnOLEDB)
-            cmdOLEDB.ExecuteNonQuery()
-            lstTransactions.FocusedItem.Remove()
-            lstTransactions.Refresh()
-            ' txtId.Text = lstTransactions.FocusedItem.SubItems(0).ToString
-            tls_btnDelete.Enabled = False
-        Catch ex As Exception
-            MessageBox.Show("Select Record to Delete" & ex.Message, "Delete Records")
-        Finally
-            cnnOLEDB.Close()
-        End Try
+        tls_btnDelete.Enabled = False
 
     End Sub
 
-   
+
     Private Sub lstTransactions_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles lstTransactions.ItemSelectionChanged
         If e.IsSelected Then
             deleteId = lstTransactions.FocusedItem.SubItems(0).Text
@@ -134,6 +115,7 @@ Public Class IngMain
 
         Else
             tls_btnDelete.Enabled = False
+            txtId.Text = ""
         End If
     End Sub
 
@@ -153,7 +135,7 @@ Public Class IngMain
 
     End Sub
 
-    Public Function getId()
+    Public Function getId() As String
         Return txtId.Text
     End Function
 
@@ -161,15 +143,18 @@ Public Class IngMain
     Private Sub tls_btnUpdate_Click(sender As Object, e As EventArgs) Handles tls_btnUpdate.Click
         frmEgresoToFill = New frm_Egresos(Me)
         frmEgresoToFill.MdiParent = frm_Main
-        frmEgresoToFill.Show()
-        frmEgresoToFill.fillFieldsToUpdate()
-        frmEgresoToFill.lblUpdateId.Visible = True
-        frmEgresoToFill.tls_btnUpdate.Enabled = True
-        frmEgresoToFill.tlsGuardar.Enabled = False
-        frmEgresoToFill.tlsNuevo.Enabled = False
+        If (txtId.Text = "") Then
+            MsgBox("Select a Row/Record first", MsgBoxStyle.Information, "Select Record")
+        Else
+            frmEgresoToFill.Show()
+            frmEgresoToFill.fillFieldsToUpdate()
+            frmEgresoToFill.lblUpdateId.Visible = True
+            frmEgresoToFill.tls_btnUpdate.Enabled = True
+            frmEgresoToFill.tlsGuardar.Enabled = False
+            frmEgresoToFill.tlsNuevo.Enabled = False
+        End If
+       
     End Sub
 
-    Private Sub ToolStripTextBox1_Click(sender As Object, e As EventArgs) Handles ToolStripTextBox1.Click
-
-    End Sub
+   
 End Class

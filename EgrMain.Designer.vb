@@ -108,6 +108,7 @@ Partial Class IngMain
         'lstTransactions
         '
         Me.lstTransactions.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmID, Me.clmDate, Me.clmAccount, Me.clmAmount, Me.clmCompany})
+        Me.lstTransactions.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstTransactions.FullRowSelect = True
         Me.lstTransactions.GridLines = True
         Me.lstTransactions.Location = New System.Drawing.Point(23, 75)
