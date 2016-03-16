@@ -28,9 +28,11 @@ Partial Class frm_Empresa
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.tlsNuevo = New System.Windows.Forms.ToolStripButton()
         Me.tlsGuardar = New System.Windows.Forms.ToolStripButton()
+        Me.btnDelete = New System.Windows.Forms.ToolStripButton()
         Me.lstData = New System.Windows.Forms.ListView()
         Me.ID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Description = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.idEntity = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -52,7 +54,7 @@ Partial Class frm_Empresa
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsNuevo, Me.tlsGuardar, Me.btnDelete})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(398, 25)
@@ -75,10 +77,18 @@ Partial Class frm_Empresa
         Me.tlsGuardar.Size = New System.Drawing.Size(69, 22)
         Me.tlsGuardar.Text = "Guardar"
         '
+        'btnDelete
+        '
+        Me.btnDelete.Image = Global.Expenses.My.Resources.Resources.delete
+        Me.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(70, 22)
+        Me.btnDelete.Text = "Eliminar"
+        '
         'lstData
         '
         Me.lstData.BackColor = System.Drawing.SystemColors.Window
-        Me.lstData.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Description})
+        Me.lstData.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ID, Me.Description, Me.idEntity})
         Me.lstData.ForeColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.lstData.FullRowSelect = True
         Me.lstData.GridLines = True
@@ -99,6 +109,10 @@ Partial Class frm_Empresa
         '
         Me.Description.Text = "Description"
         Me.Description.Width = 255
+        '
+        'idEntity
+        '
+        Me.idEntity.Text = "iD"
         '
         'frm_Empresa
         '
@@ -128,4 +142,6 @@ Partial Class frm_Empresa
     Friend WithEvents lstData As System.Windows.Forms.ListView
     Friend WithEvents ID As System.Windows.Forms.ColumnHeader
     Friend WithEvents Description As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btnDelete As System.Windows.Forms.ToolStripButton
+    Friend WithEvents idEntity As System.Windows.Forms.ColumnHeader
 End Class

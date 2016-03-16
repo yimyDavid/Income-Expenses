@@ -75,8 +75,8 @@
     End Sub
 
     Private Sub ProgramadorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProgramadorToolStripMenuItem.Click
-        'Dim frm_About As New frmAbout()
-        Dim frm_About As New test()
+        Dim frm_About As New frmAbout()
+        ' Dim frm_About As New test()
         'Set parent for this form
         frm_About.MdiParent = Me
         frm_About.Show()
@@ -113,5 +113,62 @@
         'Set parent for this form
         frm_Report.MdiParent = Me
         frm_Report.Show()
+    End Sub
+
+    Private Sub frm_Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        changeBG()
+    End Sub
+
+    Private Sub BackgroundColorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackgroundColorToolStripMenuItem.Click
+        Dim cd As New ColorDialog()
+
+        If cd.ShowDialog() = DialogResult.OK Then
+            Me.BackColor = cd.Color
+            changeBG()
+        End If
+    End Sub
+
+    Private Sub changeBG()
+        Dim ctl As Control
+        Dim ctlMDI As MdiClient
+
+        ' Loop through all of the form's controls looking
+        ' for the control of type MdiClient.
+        For Each ctl In Me.Controls
+            Try
+                ' Attempt to cast the control to type MdiClient.
+                ctlMDI = CType(ctl, MdiClient)
+
+                ' Set the BackColor of the MdiClient control.
+                ctlMDI.BackColor = Me.BackColor
+
+            Catch exc As InvalidCastException
+                ' Catch and ignore the error if casting failed.
+            End Try
+        Next
+
+        ' Display a child form to show this is still an MDI application.
+    End Sub
+
+    Private Sub changeBGImage()
+        Dim bgImage As New OpenFileDialog
+        bgImage.Filter = "JPEG|*.jpg|Bitmap|*.bmp"
+
+        bgImage.Title = "Select Image file"
+
+        If bgImage.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+
+        Try
+            Dim bmp As New Bitmap(bgImage.FileName)
+            If Not IsNothing(Me.BackgroundImage) Then Me.BackgroundImage.Dispose()
+            Me.BackgroundImage = bmp
+        Catch ex As Exception
+            MsgBox("Not valid image file", vbCritical, "Image Error")
+        End Try
+
+    End Sub
+
+    Private Sub BackgroundImageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BackgroundImageToolStripMenuItem.Click
+        changeBGImage()
     End Sub
 End Class

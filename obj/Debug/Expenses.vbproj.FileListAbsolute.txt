@@ -7,13 +7,11 @@ F:\UMASS\CS410\Expenses\obj\Debug\Expenses.vbproj.GenerateResource.Cache
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.exe
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.xml
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.pdb
-F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Ingreso.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Main.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Categoria.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Egresos.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frm_Empresa.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.IngMain.resources
-F:\UMASS\CS410\Expenses\obj\Debug\Expenses.IngrMain.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.frmAbout.resources
 F:\UMASS\CS410\Expenses\obj\Debug\Expenses.vbprojResolveAssemblyReference.cache
 F:\UMASS\CS410\Expenses\obj\Debug\RdlCompile.cache

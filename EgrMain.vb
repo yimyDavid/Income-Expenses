@@ -1,9 +1,6 @@
 ﻿
 Public Class IngMain
     Private dbAccess As New DBControl
-
-  
-
     Dim deleteId As String = -1
     Dim deleteRecord As String
     Dim indexList As String
@@ -50,10 +47,7 @@ Public Class IngMain
         Next
 
     End Sub
-
-
     Private Sub IngMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         fillList()
        
     End Sub
@@ -61,7 +55,6 @@ Public Class IngMain
     Public Sub updateList(detailList As ListViewItem)
         Dim id As String
         Dim findItem As ListViewItem
-        'Dim indexList As String
         id = detailList.SubItems(0).Text
         'MsgBox(id)
         findItem = lstTransactions.FindItemWithText(id)
@@ -155,6 +148,4 @@ Public Class IngMain
         End If
        
     End Sub
-
-   
 End Class

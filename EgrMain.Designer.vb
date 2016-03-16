@@ -24,8 +24,6 @@ Partial Class IngMain
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(IngMain))
         Me.tsExpenses = New System.Windows.Forms.ToolStrip()
-        Me.tlsMonth = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tls_btnUpdate = New System.Windows.Forms.ToolStripButton()
@@ -46,26 +44,12 @@ Partial Class IngMain
         '
         Me.tsExpenses.BackColor = System.Drawing.SystemColors.Control
         Me.tsExpenses.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.tsExpenses.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tlsMonth, Me.ToolStripTextBox1, Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tls_btnUpdate, Me.ToolStripSeparator2, Me.tls_btnDelete})
+        Me.tsExpenses.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripSeparator1, Me.tls_btnUpdate, Me.ToolStripSeparator2, Me.tls_btnDelete})
         Me.tsExpenses.Location = New System.Drawing.Point(0, 0)
         Me.tsExpenses.Name = "tsExpenses"
         Me.tsExpenses.Size = New System.Drawing.Size(723, 31)
         Me.tsExpenses.TabIndex = 0
         Me.tsExpenses.Text = "ToolStrip1"
-        '
-        'tlsMonth
-        '
-        Me.tlsMonth.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.tlsMonth.Items.AddRange(New Object() {"Enero", "Febreo", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"})
-        Me.tlsMonth.Name = "tlsMonth"
-        Me.tlsMonth.Size = New System.Drawing.Size(121, 31)
-        Me.tlsMonth.Text = "Elegir Mes"
-        '
-        'ToolStripTextBox1
-        '
-        Me.ToolStripTextBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
-        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 31)
         '
         'ToolStripButton1
         '
@@ -188,8 +172,6 @@ Partial Class IngMain
 
     End Sub
     Friend WithEvents tsExpenses As System.Windows.Forms.ToolStrip
-    Friend WithEvents tlsMonth As System.Windows.Forms.ToolStripComboBox
-    Friend WithEvents ToolStripTextBox1 As System.Windows.Forms.ToolStripTextBox
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents tls_btnUpdate As System.Windows.Forms.ToolStripButton

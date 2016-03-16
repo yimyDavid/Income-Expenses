@@ -3,6 +3,7 @@ Public Class frm_Categoria
     Private dbAccess As New DBControl
 
     Private idAccount As String = -1
+    Private selectedItemList As String
 
 
     Private Sub tlsNuevo_Click(sender As Object, e As EventArgs) Handles tlsNuevo.Click
@@ -33,7 +34,7 @@ Public Class frm_Categoria
         ' Add New Record to Database Table
         addCategory()
 
-        lstCategory.Items.Add(New ListViewItem(New String() {txtAccount.Text, cboType.SelectedText}))
+        lstCategory.Items.Add(New ListViewItem(New String() {txtAccount.Text, cboType.Text, dbAccess.auto_increment_value}))
 
         clearFields()
 
@@ -141,7 +142,7 @@ Public Class frm_Categoria
 
         Dim Answer As Integer
         If (idAccount >= 0) Then
-            Answer = MsgBox("All Records Associated with this Account will also be Deleted" + vbCrLf + _
+            Answer = MsgBox("All Records Associated with this Account (" + idAccount + ") will also be Deleted" + vbCrLf + _
                             "Would you like to Continue?", MsgBoxStyle.YesNo + vbExclamation, "Delete Record")
         Else
             MsgBox("Select Record from the list first", MsgBoxStyle.Information, "Select Record")
@@ -149,6 +150,7 @@ Public Class frm_Categoria
 
         If (Answer = vbYes And idAccount >= 0) Then
             deleteRecord()
+            lstCategory.Items.RemoveAt(selectedItemList)
             idAccount = -1
         End If
 
@@ -160,6 +162,7 @@ Public Class frm_Categoria
     Private Sub lstCategory_ItemSelectionChanged(sender As Object, e As ListViewItemSelectionChangedEventArgs) Handles lstCategory.ItemSelectionChanged
         If e.IsSelected Then
             idAccount = lstCategory.FocusedItem.SubItems(2).Text
+            selectedItemList = lstCategory.FocusedItem.Index
 
         End If
     End Sub

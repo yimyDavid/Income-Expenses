@@ -118,23 +118,11 @@
     <Compile Include="frmReports.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IngrMain.Designer.vb">
-      <DependentUpon>IngrMain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="IngrMain.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.vb">
       <DependentUpon>Main.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ingreso.Designer.vb">
-      <DependentUpon>Ingreso.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Ingreso.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -184,14 +172,8 @@
     <EmbeddedResource Include="frmReports.resx">
       <DependentUpon>frmReports.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IngrMain.resx">
-      <DependentUpon>IngrMain.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Ingreso.resx">
-      <DependentUpon>Ingreso.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

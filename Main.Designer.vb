@@ -43,15 +43,18 @@ Partial Class frm_Main
         Me.tlsClose = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
+        Me.ConfigurationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BackgroundColorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BackgroundImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.tlsBarMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresosToolStripMenuItem, Me.ClasificacionesToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.ProgramadorToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IngresosToolStripMenuItem, Me.ClasificacionesToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.ProgramadorToolStripMenuItem, Me.ConfigurationToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(567, 24)
@@ -68,24 +71,24 @@ Partial Class frm_Main
         'IngresosToolStripMenuItem1
         '
         Me.IngresosToolStripMenuItem1.Name = "IngresosToolStripMenuItem1"
-        Me.IngresosToolStripMenuItem1.Size = New System.Drawing.Size(138, 22)
+        Me.IngresosToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.IngresosToolStripMenuItem1.Text = "&New Record"
         '
         'EgresosToolStripMenuItem
         '
         Me.EgresosToolStripMenuItem.Name = "EgresosToolStripMenuItem"
-        Me.EgresosToolStripMenuItem.Size = New System.Drawing.Size(138, 22)
+        Me.EgresosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.EgresosToolStripMenuItem.Text = "&Records"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(135, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(149, 6)
         '
         'ExitToolStripMenuItem1
         '
         Me.ExitToolStripMenuItem1.Name = "ExitToolStripMenuItem1"
-        Me.ExitToolStripMenuItem1.Size = New System.Drawing.Size(138, 22)
+        Me.ExitToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.ExitToolStripMenuItem1.Text = "&Exit"
         '
         'ClasificacionesToolStripMenuItem
@@ -208,6 +211,11 @@ Partial Class frm_Main
         Me.ToolStripButton1.Text = "Re&ports"
         Me.ToolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 83)
+        '
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.AutoSize = True
@@ -217,15 +225,31 @@ Partial Class frm_Main
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(567, 0)
         Me.FlowLayoutPanel1.TabIndex = 4
         '
-        'ToolStripSeparator6
+        'ConfigurationToolStripMenuItem
         '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 83)
+        Me.ConfigurationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BackgroundColorToolStripMenuItem, Me.BackgroundImageToolStripMenuItem})
+        Me.ConfigurationToolStripMenuItem.Name = "ConfigurationToolStripMenuItem"
+        Me.ConfigurationToolStripMenuItem.Size = New System.Drawing.Size(93, 20)
+        Me.ConfigurationToolStripMenuItem.Text = "Con&figuration"
+        '
+        'BackgroundColorToolStripMenuItem
+        '
+        Me.BackgroundColorToolStripMenuItem.Name = "BackgroundColorToolStripMenuItem"
+        Me.BackgroundColorToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.BackgroundColorToolStripMenuItem.Text = "Background Color"
+        '
+        'BackgroundImageToolStripMenuItem
+        '
+        Me.BackgroundImageToolStripMenuItem.Name = "BackgroundImageToolStripMenuItem"
+        Me.BackgroundImageToolStripMenuItem.Size = New System.Drawing.Size(174, 22)
+        Me.BackgroundImageToolStripMenuItem.Text = "Background Image"
         '
         'frm_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.Highlight
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ClientSize = New System.Drawing.Size(567, 401)
         Me.Controls.Add(Me.tlsBarMain)
         Me.Controls.Add(Me.FlowLayoutPanel1)
@@ -266,5 +290,8 @@ Partial Class frm_Main
     Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ConfigurationToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BackgroundColorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BackgroundImageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

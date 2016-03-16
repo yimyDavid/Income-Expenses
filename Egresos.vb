@@ -5,14 +5,8 @@ Public Class frm_Egresos
     Private _ingMain As IngMain
     Private _frm_Main As frm_Main
 
-    'Dim auto_increment As Integer
     Dim updateId As Integer
-    ' Dim expDate As String
-    'Dim entityId As Integer
-    'Dim accountId As Integer
-    'Dim amount As Double
-    ' Dim comments As String
-
+  
     Sub New(ByVal mainEgr As IngMain)
         InitializeComponent()
         _ingMain = mainEgr
@@ -24,13 +18,8 @@ Public Class frm_Egresos
         InitializeComponent()
         _frm_Main = frm_Main
     End Sub
-
-
-
     Private Sub tlsNuevo_Click(sender As Object, e As EventArgs) Handles tlsNuevo.Click
         clearFields()
-
-
     End Sub
     Private Sub cboEntity_DrawItem(ByVal sender As System.Object, _
                                  ByVal e As System.Windows.Forms.DrawItemEventArgs) _
@@ -174,11 +163,6 @@ Public Class frm_Egresos
         _ingMain.updateList(new_item)
 
         clearFields()
-
-        ' Else
-        '    MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
-        ' End If
-
     End Sub
 
     Private Function checkRequiredFields()
@@ -191,7 +175,6 @@ Public Class frm_Egresos
             MsgBox("Some Fields are empty or" & vbCrLf & " the  Date/Number have incorrect format", MsgBoxStyle.Critical, "Empty/Format Required Fields")
             'Return empty
         End If
-        ' empty = IsNumeric(mtxtAmount.Text)
         Return empty
     End Function
 
